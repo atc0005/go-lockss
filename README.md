@@ -1,7 +1,7 @@
 <!-- omit in toc -->
 # go-lockss
 
-Go-based tooling for working with LOCKSS systems
+Go-based tooling for monitoring and troubleshooting LOCKSS nodes.
 
 <!-- omit in toc -->
 ## Table of contents
