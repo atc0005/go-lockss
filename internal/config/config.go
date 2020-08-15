@@ -35,19 +35,18 @@ const (
 	configServerURLFlagHelp    = "Fully-qualified URL to the LOCKSS configuration/property XML file."
 	configReadTimeoutFlagHelp  = "Maximum number of seconds allowed for a request for the LOCKSS configuration XML file before timing out."
 	portConnectTimeoutFlagHelp = "Maximum number of seconds allowed for a connection test against a remote TCP port before timing out."
-	nodePortFlagHelp           = "TCP port to connect to on remote LOCKSS nodes to verify connectivity. This flag may be repeated for each additional TCP port to check. The flag defaults to 9729 if not specified."
+	nodePortFlagHelp           = "Additional TCP port to connect to on remote LOCKSS nodes to verify connectivity. This flag may be repeated for each additional TCP port to check. If not set, this application connects only to the port (usually 9729) specified in the LOCKSS configuration/property XML file."
 )
 
 // Default flag settings if not overridden by user input. Some constants are
 // untyped in order to allow type promotion as needed.
 const (
 	defaultLogLevel              string = "info"
-	defaultLogFormat             string = "cli"
+	defaultLogFormat             string = "text"
 	defaultDisplayVersionAndExit bool   = false
 	defaultConfigFile            string = ""
 	defaultConfigReadTimeout            = 10
 	defaultPortConnectTimeout           = 1
-	defaultNodePort                     = 9729
 )
 
 // multiIntValueFlag is a custom type that satisfies the flag.Value interface
@@ -137,7 +136,7 @@ type Config struct {
 func (c Config) String() string {
 	return fmt.Sprintf(
 		"Config: { ConfigFile: %v, ConfigServerURL: %v, ConfigServerReadTimeout: %v, "+
-			"PortConnectTimeout: %v, LogFormat: %v, LogLevel: %v, NodePorts: %v, "+
+			"PortConnectTimeout: %v, LogFormat: %v, LogLevel: %v, UserNodePorts: %v, "+
 			"ShortVersion: %v}",
 		c.ConfigFile(),
 		c.ConfigServerURL(),
@@ -145,7 +144,7 @@ func (c Config) String() string {
 		c.PortConnectTimeout(),
 		c.LogFormat(),
 		c.LogLevel(),
-		c.NodePorts(),
+		c.UserNodePorts(),
 		c.ShowVersion(),
 	)
 }
@@ -200,7 +199,8 @@ func NewConfig() (*Config, error) {
 
 	log.Debug("Validating configuration ...")
 	if err := config.Validate(); err != nil {
-		flag.Usage()
+		//flag.Usage()
+		// Let app handle this directly
 		return nil, err
 	}
 	log.Debug("Configuration validated")

@@ -27,7 +27,7 @@ func (rs Results) PrintSummary() {
 
 	// Add some lead-in spacing to better separate any earlier log messages from
 	// summary output
-	fmt.Fprintf(w, "\n\n")
+	fmt.Fprintf(w, "\n")
 
 	// Header row in output
 	fmt.Fprintf(w, "Peer\tPort\tOpen\tError\t\n")
@@ -60,15 +60,36 @@ func (rs Results) PrintSummary() {
 
 	fmt.Fprintln(w)
 
-	reachable := rs.Reachable()
-	pReachable := float32(reachable) / float32(len(rs)) * 100
+	hosts := rs.Hosts()
+	hostsReachable := rs.HostsReachable()
+	pHostsReachable := float32(hostsReachable) / float32(hosts) * 100
+
+	ports := rs.Ports()
+	portsScanned := rs.PortsScanned()
+	portsReachable := rs.PortsReachable()
+	pPortsReachable := float32(portsReachable) / float32(portsScanned) * 100
+
+	fmt.Print("Summary:\n\n")
 
 	fmt.Printf(
-		"Summary: %.0f%% (%d/%d) of peer nodes are reachable from this system.\n",
-		pReachable,
-		reachable,
+		"- %d unique ports checked on each of %d hosts.\n",
+		ports,
+		hosts,
+	)
+
+	fmt.Printf(
+		"- %.0f%% (%d/%d) of peer nodes are reachable (at least one open port) from this system.\n",
+		pHostsReachable,
+		hostsReachable,
+		hosts,
+	)
+	fmt.Printf(
+		"- %.0f%% (%d/%d) of ports scanned are reachable from this system.\n",
+		pPortsReachable,
+		portsReachable,
 		len(rs),
 	)
+	fmt.Println()
 
 	if err := w.Flush(); err != nil {
 		log.Errorf("Error flushing tabwriter: %v", err.Error())

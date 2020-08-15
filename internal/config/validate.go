@@ -16,6 +16,21 @@ import (
 	"github.com/atc0005/go-lockss/internal/caller"
 )
 
+// TCP port ranges
+// http://www.iana.org/assignments/port-numbers
+// Port numbers are assigned in various ways, based on three ranges: System
+// Ports (0-1023), User Ports (1024-49151), and the Dynamic and/or Private
+// Ports (49152-65535)
+const (
+	TCPReservedPort            int = 0
+	TCPSystemPortStart         int = 1
+	TCPSystemPortEnd           int = 1023
+	TCPUserPortStart           int = 1024
+	TCPUserPortEnd             int = 49151
+	TCPDynamicPrivatePortStart int = 49152
+	TCPDynamicPrivatePortEnd   int = 65535
+)
+
 // Validate verifies all struct fields have been provided acceptable values
 func (c Config) Validate() error {
 
@@ -30,13 +45,34 @@ func (c Config) Validate() error {
 	// }
 	// log.Debugf("c.ConfigFile() validates: %#v", c.ConfigFile())
 
-	if c.NodePorts() == nil || len(c.NodePorts()) == 0 {
-		return fmt.Errorf(
-			"%s: one or more TCP ports not provided",
-			myFuncName,
-		)
+	if len(c.UserNodePorts()) > 0 {
+
+		for _, port := range c.UserNodePorts() {
+			switch {
+
+			case (port >= TCPSystemPortStart) && (port <= TCPDynamicPrivatePortEnd):
+				log.Debugf(
+					"Port %d is within the range of %d and %d",
+					port,
+					TCPSystemPortStart,
+					TCPDynamicPrivatePortEnd,
+				)
+
+			default:
+				errMsg := fmt.Sprintf(
+					"invalid port %d specified; outside of the range of %d and %d",
+					port,
+					TCPSystemPortStart,
+					TCPDynamicPrivatePortEnd,
+				)
+				log.Debugf("%s: %v", myFuncName, errMsg)
+
+				return fmt.Errorf(errMsg)
+			}
+		}
+
 	}
-	log.Debugf("c.NodePorts() validates: (%d entries) %#v", len(c.NodePorts()), c.NodePorts())
+	log.Debugf("c.UserNodePorts() validates: (%d entries) %#v", len(c.UserNodePorts()), c.UserNodePorts())
 
 	if c.PortConnectTimeout() == 0 {
 		return fmt.Errorf(

@@ -38,7 +38,9 @@ func main() {
 	case errors.Is(err, flag.ErrHelp):
 		os.Exit(0)
 	default:
-		log.Fatalf("failed to initialize application: %s", err)
+		log.Errorf("failed to initialize application: %s", err)
+		flag.Usage()
+		os.Exit(1)
 	}
 
 	// If user supplied values, we should use those to retrieve the LOCKSS
@@ -118,7 +120,7 @@ func main() {
 				"Protocol: %q, IP Address: %q, Port: %d\n",
 				peer.Protocol,
 				peer.IPAddress,
-				peer.Port,
+				peer.LCAPPort,
 			)
 
 			fmt.Println("peer.Network():", peer.Network())
@@ -127,13 +129,14 @@ func main() {
 
 	}
 
-	// spin off X goroutines, where X is len(peersList) and check the peer.Port
-	// returning the result on a channel?
-	// create a context, pass to the goroutines
-	// inside of the goroutines setup a deadline and then a select block
-	// the select block can listen on a result and a timeout
+	ports := append(appCfg.UserNodePorts(), peersList[0].LCAPPort)
+	ports = portchecks.UniquePorts(ports...)
 
-	expectedResponses := len(peersList)
+	numPorts := len(ports)
+	numPeers := len(peersList)
+	expectedResponses := numPeers * numPorts
+
+	log.Debugf("Expected responses: %d", expectedResponses)
 
 	// collect results here that are pulled off the channel used by
 	// goroutines as they complete their work
@@ -144,11 +147,20 @@ func main() {
 	// collection delay.
 	resultsChan := make(chan portchecks.Result, expectedResponses)
 
+	fmt.Printf(
+		"\n[%v] Checking %d ports on %d peer nodes ...\n",
+		time.Now().Format("2006-01-02 15.04:05"),
+		numPorts,
+		numPeers,
+	)
+
 	for _, peer := range peersList {
-		go func(peer lockss.V3Peer, connTimeout time.Duration) {
-			log.Infof("Checking port %d on %s ...", peer.Port, peer.IPAddress)
-			resultsChan <- portchecks.CheckPort(peer, connTimeout)
-		}(peer, appCfg.PortConnectTimeout())
+		go func(peer lockss.V3Peer, ports []int, connTimeout time.Duration) {
+			for _, port := range ports {
+				log.Debugf("Checking port %d on %s ...", port, peer.IPAddress)
+				resultsChan <- portchecks.CheckPort(peer, port, connTimeout)
+			}
+		}(peer, ports, appCfg.PortConnectTimeout())
 	}
 
 	// Collect all responses, continue until we exhaust the number of expected
@@ -158,6 +170,8 @@ func main() {
 		result := <-resultsChan
 		results = append(results, result)
 		remainingResponses--
+
+		log.Debugf("Still waiting on %d responses ...\n", remainingResponses)
 	}
 
 	results.PrintSummary()

@@ -34,8 +34,10 @@ type V3Peer struct {
 	// try to communicate with
 	IPAddress string
 
-	// Port is the TCP port used to make connections to remote LOCKSS nodes
-	Port int
+	// LCAPPort is the LCAP (Library Content Audit Protocol) TCP port used to
+	// make connections to remote LOCKSS nodes for content voting, polling and
+	// repairing purposes.
+	LCAPPort int
 }
 
 // Network returns the name of the network (for example, "tcp", "udp") in
@@ -47,7 +49,7 @@ func (v3p V3Peer) Network() string {
 // String returns the string from of the address, port pair in order to
 // implement the net.Addr interface.
 func (v3p V3Peer) String() string {
-	return fmt.Sprintf("%s:%d", v3p.IPAddress, v3p.Port)
+	return fmt.Sprintf("%s:%d", v3p.IPAddress, v3p.LCAPPort)
 }
 
 // List returns a slice of initial peers.
@@ -134,7 +136,7 @@ func (l IDInitialV3Peers) List() ([]V3Peer, error) {
 		peer := V3Peer{
 			Protocol:  peerProtocol,
 			IPAddress: peerIPAddress,
-			Port:      int(peerPort),
+			LCAPPort:  int(peerPort),
 		}
 
 		peers = append(peers, peer)
