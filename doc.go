@@ -26,23 +26,19 @@ FEATURES
 
 • User configurable logging format
 
-• User configurable times (config file retrieval, port connection tests)
+• User configurable timeouts (config file retrieval, port connection tests)
 
 • User configurable location of LOCKSS configuration/property settings (custom file or URL)
+
+• User configurable *additional* TCP ports to check; the default is to scan the LCAP port provided in the LOCKSS configuration/property XML file
 
 KNOWN ISSUES
 
 • The prototype `cmd/n2n` binary is a stub application, not usable in its current form.
 
-• The `--ports` flag is not currently used; the provided help text is misleading
-
-• Missing documentation/examples
-
 USAGE
 
-• Use the `--help` flag for current options (see KNOWN ISSUES)
-
-• The README will be updated to provide examples at a future date
+• Use the `--help` flag for current options
 
 */
 
