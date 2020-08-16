@@ -13,17 +13,23 @@ import (
 	"github.com/apex/log"
 )
 
-// NodePorts returns the user-provided LOCKSS node ports to check or the
-// default port if no ports were specified.
-func (c Config) NodePorts() []int64 {
+// UserNodePorts returns the user-provided LOCKSS node ports to check or an
+// empty slice if no ports were specified.
+func (c Config) UserNodePorts() []int {
+
+	// force conversion of int64 to int in order to be more flexible (e.g.,
+	// the net standard library tends to work with `int` and `string` type
+	// instead of `int64`)
 
 	switch {
 	case c.nodePorts != nil:
-		return c.nodePorts
+		var ports []int
+		for i := range c.nodePorts {
+			ports = append(ports, int(c.nodePorts[i]))
+		}
+		return ports
 	default:
-		var defaultPort multiValueIntFlag
-		defaultPort = append(defaultPort, defaultNodePort)
-		return defaultPort
+		return []int{}
 	}
 }
 

@@ -41,7 +41,7 @@ func main() {
 				"Protocol: %q, IP Address: %q, Port: %d\n",
 				peer.Protocol,
 				peer.IPAddress,
-				peer.Port,
+				peer.LCAPPort,
 			)
 
 			fmt.Println("peer.Network():", peer.Network())

@@ -10,7 +10,6 @@ package portchecks
 import (
 	"fmt"
 	"net"
-	"strconv"
 	"time"
 
 	"github.com/apex/log"
@@ -34,12 +33,13 @@ type Result struct {
 // of this check is returned as a Result value for later processing. Any
 // errors which occur as part of this check are recorded as a partial check
 // Result.
-func CheckPort(netAddr net.Addr, timeout time.Duration) Result {
+func CheckPort(netAddr net.Addr, port int, timeout time.Duration) Result {
 
 	myFuncName := caller.GetFuncName()
 
 	// split out net.Addr into host, port values
-	host, portStr, err := net.SplitHostPort(netAddr.String())
+	// host, portStr, err := net.SplitHostPort(netAddr.String())
+	host, _, err := net.SplitHostPort(netAddr.String())
 	if err != nil {
 		return Result{
 			Host: host,
@@ -52,20 +52,20 @@ func CheckPort(netAddr net.Addr, timeout time.Duration) Result {
 	}
 
 	// convert port string into int64
-	portInt, strConvErr := strconv.ParseInt(portStr, 10, 32)
-	if strConvErr != nil {
-		return Result{
-			Host: host,
-			Error: fmt.Errorf(
-				"%s: error occurred converting port string: %w",
-				myFuncName,
-				strConvErr,
-			),
-		}
-	}
+	// portInt, strConvErr := strconv.ParseInt(portStr, 10, 32)
+	// if strConvErr != nil {
+	// 	return Result{
+	// 		Host: host,
+	// 		Error: fmt.Errorf(
+	// 			"%s: error occurred converting port string: %w",
+	// 			myFuncName,
+	// 			strConvErr,
+	// 		),
+	// 	}
+	// }
 
-	// force int64 to int type in order to fit into our Result struct
-	port := int(portInt)
+	// // force int64 to int type in order to fit into our Result struct
+	// port := int(portInt)
 
 	log.Debugf("Host: %s", host)
 	log.Debugf("Port: %d", port)
@@ -74,7 +74,7 @@ func CheckPort(netAddr net.Addr, timeout time.Duration) Result {
 	if err != nil {
 
 		log.Debugf(
-			"%s: error connecting to port %d/%s on %s: %w",
+			"%s: error connecting to port %d/%s on %s: %v",
 			myFuncName,
 			port,
 			netAddr.Network(),
@@ -115,8 +115,70 @@ func CheckPort(netAddr net.Addr, timeout time.Duration) Result {
 
 }
 
-// Reachable returns the number of open ports found.
-func (rs Results) Reachable() int {
+// UniquePorts accepts one or more ports of potentially duplicated ports and
+// returns a slice of unique ports
+func UniquePorts(ports ...int) []int {
+
+	uniquePorts := make(map[int]int)
+
+	for _, port := range ports {
+		uniquePorts[port] = port
+	}
+
+	portsList := make([]int, 0, len(uniquePorts))
+	for _, port := range uniquePorts {
+		portsList = append(portsList, port)
+	}
+
+	return portsList
+
+}
+
+// Hosts returns the number of unique hosts in the results set.
+func (rs Results) Hosts() int {
+
+	hosts := make(map[string][]int, 10)
+
+	for _, i := range rs {
+		hosts[i.Host] = append(hosts[i.Host], i.Port)
+	}
+
+	return len(hosts)
+}
+
+// HostsReachable returns the number of hosts with at least one open port.
+func (rs Results) HostsReachable() int {
+
+	hosts := make(map[string][]int, 10)
+
+	for _, i := range rs {
+		if i.Open {
+			hosts[i.Host] = append(hosts[i.Host], i.Port)
+		}
+	}
+
+	return len(hosts)
+}
+
+// Ports returns the number of unique ports in the results set.
+func (rs Results) Ports() int {
+
+	ports := make(map[int]int, 10)
+
+	for _, i := range rs {
+		ports[i.Port] = i.Port
+	}
+
+	return len(ports)
+}
+
+// PortsScanned returns the total port scan attempts in the results set.
+func (rs Results) PortsScanned() int {
+	return len(rs)
+}
+
+// PortsReachable returns the number of open ports found.
+func (rs Results) PortsReachable() int {
 
 	var r int
 
