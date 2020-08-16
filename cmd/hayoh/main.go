@@ -23,12 +23,7 @@ import (
 
 func main() {
 
-	fmt.Printf(
-		"\n[%v] Starting %s version %q ...\n",
-		time.Now().Format("2006-01-02 15.04:05"),
-		config.MyBinaryName(),
-		config.Version,
-	)
+	log.Debug("Initializing application")
 
 	// config.EnableLogging()
 	lockss.DisableLogging()
@@ -49,6 +44,13 @@ func main() {
 		flag.Usage()
 		os.Exit(1)
 	}
+
+	fmt.Printf(
+		"\n[%v] Starting %s version %q ...\n",
+		time.Now().Format("2006-01-02 15.04:05"),
+		config.MyBinaryName(),
+		config.Version,
+	)
 
 	// If user supplied values, we should use those to retrieve the LOCKSS
 	// configuration from the central LOCKSS configuration server, otherwise
