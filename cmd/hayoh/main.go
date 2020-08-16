@@ -23,6 +23,13 @@ import (
 
 func main() {
 
+	fmt.Printf(
+		"\n[%v] Starting %s version %q ...\n",
+		time.Now().Format("2006-01-02 15.04:05"),
+		config.MyBinaryName(),
+		config.Version,
+	)
+
 	// config.EnableLogging()
 	lockss.DisableLogging()
 
@@ -148,7 +155,7 @@ func main() {
 	resultsChan := make(chan portchecks.Result, expectedResponses)
 
 	fmt.Printf(
-		"\n[%v] Checking %d ports on %d peer nodes ...\n",
+		"[%v] Checking %d ports on %d peer nodes ...\n",
 		time.Now().Format("2006-01-02 15.04:05"),
 		numPorts,
 		numPeers,

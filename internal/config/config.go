@@ -23,9 +23,13 @@ import (
 // for release builds.
 var Version string = "dev build"
 
-// Primarily used with branding
-const myAppName string = "go-lockss"
-const myAppURL string = "https://github.com/atc0005/" + myAppName
+// MyAppName is the branded name of this application/project. This value will
+// be used in user-facing output.
+const MyAppName string = "go-lockss"
+
+// MyAppURL is the branded homepage or project repo location. This value will
+// be used in user-facing output.
+const MyAppURL string = "https://github.com/atc0005/" + MyAppName
 
 const (
 	versionFlagHelp            = "Whether to display application version and then immediately exit application."
@@ -151,7 +155,18 @@ func (c Config) String() string {
 
 // Branding is responsible for emitting application name, version and origin
 func Branding() {
-	fmt.Fprintf(flag.CommandLine.Output(), "\n%s %s\n%s\n\n", myAppName, Version, myAppURL)
+	fmt.Fprintf(
+		flag.CommandLine.Output(),
+		"\n%s %s\n%s\n\n",
+		MyAppName,
+		Version,
+		MyAppURL,
+	)
+}
+
+// MyBinaryName returns the name of this binary
+func MyBinaryName() string {
+	return filepath.Base(os.Args[0])
 }
 
 // flagsUsage displays branding information and general usage details
@@ -159,12 +174,12 @@ func flagsUsage() func() {
 
 	return func() {
 
-		myBinaryName := filepath.Base(os.Args[0])
-
 		Branding()
 
-		fmt.Fprintf(flag.CommandLine.Output(), "Usage of \"%s\":\n",
-			myBinaryName,
+		fmt.Fprintf(
+			flag.CommandLine.Output(),
+			"Usage of \"%s\":\n",
+			MyBinaryName(),
 		)
 		flag.PrintDefaults()
 
