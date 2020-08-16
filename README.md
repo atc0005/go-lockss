@@ -54,17 +54,17 @@ additional "bake time" has occurred.
   - a nice side-effect is that this makes deployment to LOCKSS nodes easier
 - User configurable logging levels
 - User configurable logging format
-- User configurable times (config file retrieval, port connection tests)
+- User configurable timeouts (config file retrieval, port connection tests)
 - User configurable location of LOCKSS configuration/property settings (custom
   file or URL)
+- User configurable *additional* TCP ports to check
+  - the default is to scan the LCAP port provided in the LOCKSS
+    configuration/property XML file
 
 ## Known Issues
 
 - The prototype `cmd/n2n` binary is a stub application, not usable in its
   current form.
-- The `--ports` flag is not currently used; the provided help text is
-  misleading
-- Missing documentation/examples
 
 ## Changelog
 
