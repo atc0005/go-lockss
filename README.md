@@ -22,6 +22,8 @@ Go-based tooling for monitoring and troubleshooting LOCKSS nodes.
     - [`n2n`](#n2n)
     - [Worth noting](#worth-noting)
 - [Examples](#examples)
+  - [`hayoh`](#hayoh-1)
+    - [No options](#no-options)
 - [License](#license)
 - [References](#references)
 
@@ -180,7 +182,38 @@ application will be repurposed for that.
 
 ## Examples
 
-Placeholder :(
+### `hayoh`
+
+#### No options
+
+This output is from running `hayoh` (commit `d7a2103`) without any options:
+
+```ShellSession
+$ ./hayoh
+
+[2020-08-16 08.17:56] Starting hayoh version "d7a2103" ...
+[2020-08-16 07.30:33] Checking 1 ports on 11 peer nodes ...
+
+Peer            Port    Open    Error
+----            ----    ----    -----
+1.2.3.4         9729    true
+5.6.7.8         9729    true
+2.3.4.5         9729    true
+2.6.4.3         9729    true
+1.3.6.7         9729    true
+9.7.6.5         9729    false   dial tcp 9.7.6.5:9729: connect: connection refused
+3.2.1.6         9729    false   dial tcp 3.2.1.6:9729: connect: connection refused
+7.4.2.1         9729    false   dial tcp 7.4.2.1:9729: i/o timeout
+7.5.2.1         9729    false   dial tcp 7.5.2.1:9729: i/o timeout
+7.8.9.0         9729    false   dial tcp 7.8.9.0:9729: i/o timeout
+5.6.4.2         9729    false   dial tcp 5.6.4.2:9729: i/o timeout
+
+Summary:
+
+- 1 unique ports checked on each of 11 hosts.
+- 45% (5/11) of peer nodes are reachable (at least one open port) from this system.
+- 45% (5/11) of ports scanned are reachable from this system.
+```
 
 ## License
 
