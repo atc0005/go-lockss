@@ -26,6 +26,14 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.1] - 2020-08-16
+
+### Fixed
+
+- Makefile
+  - Remove stray parenthesis (a typo) preventing version embedding from
+    working properly
+
 ## [v0.1.0] - 2020-08-16
 
 ### Added
@@ -59,5 +67,6 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.1...HEAD
+[v0.1.1]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.1
 [v0.1.0]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.0
