@@ -71,7 +71,7 @@ func (l IDInitialV3Peers) List() ([]V3Peer, error) {
 		return nil, fmt.Errorf("error compiling regex: %w", regExCompileErr)
 	}
 
-	xpathExpression := "//property[@name='id.initialV3PeerList']//list/value"
+	xpathExpression := "//property[@name='org.lockss']/property[@name='id.initialV3PeerList']/list/value"
 
 	xmlqueryNodes, err := xmlquery.QueryAll(l.xmlDoc, xpathExpression)
 	if err != nil {
