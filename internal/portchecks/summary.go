@@ -87,7 +87,7 @@ func (rs Results) PrintSummary() {
 		"- %.0f%% (%d/%d) of ports scanned are reachable from this system.\n",
 		pPortsReachable,
 		portsReachable,
-		len(rs),
+		portsScanned,
 	)
 	fmt.Println()
 
