@@ -23,6 +23,21 @@ const v3PeerRegex string = `^\s*(TCP):\[([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\]:([0-9
 const v3PeerExpectedFormat string = "TCP:[1.2.3.4]:9729"
 const v3PeerRegexExpectedMatches int = 4
 
+// IDInitialV3Peers represents the initial list of V3 peers for a LOCKSS node.
+type IDInitialV3Peers struct {
+
+	// xmlDoc is the parse tree generated from the LOCKSS
+	// properties/configuration XML file by the xmlquery package.
+	xmlDoc *xmlquery.Node
+
+	// preservationGroup is the group defined in the local LOCKSS daemon
+	// configuration file that the node is a member of. Membership in this
+	// group is required in order to receive certain settings, including
+	// collections of peer nodes. Not all LOCKSS networks will filter settings
+	// based on this group.
+	preservationGroup string
+}
+
 // V3Peer represents a peer LOCKSS node in the network. This type implements
 // the net.Addr interface (https://golang.org/pkg/net/#Addr).
 type V3Peer struct {

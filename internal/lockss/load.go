@@ -37,6 +37,27 @@ type configVar struct {
 	Value string
 }
 
+// daemonConfig represents the key=value settings found within the local
+// LOCKSS daemon configuration file.
+type daemonConfig map[string]string
+
+// get is a helper method for retrieving specific configuration settings found
+// within the local LOCKSS daemon configuration file.
+func (dc daemonConfig) get(setting string) (string, error) {
+
+	myFuncName := caller.GetFuncName()
+
+	if _, ok := dc[setting]; !ok {
+		return "", fmt.Errorf(
+			"%s: requested setting %q not found",
+			myFuncName,
+			setting,
+		)
+	}
+
+	return dc[setting], nil
+}
+
 // loadFromPropsFile attempts to update the current configuration settings by
 // using the user-specified path to an on-disk copy of the LOCKSS Properties
 // (Parameters) XML file. Any error that occurs is returned. This function is
@@ -73,7 +94,7 @@ func (c *Config) loadFromPropsFile(filename string) (*Config, error) {
 	}
 
 	// Update our config object with parsed XML data
-	c.InitConfig(doc)
+	c.SetXMLDoc(doc)
 
 	return c, nil
 
@@ -209,11 +230,8 @@ func (c *Config) loadFromPropsURLWithContext(ctx context.Context, url string) (*
 		logger.Println("Context has expired after parsing response body:", time.Now().Format(logTimeLayout))
 	}
 
-	// record the provided config URL for potential later use
-	c.PropsURL = url
-
 	// Update our config object with parsed XML data
-	c.InitConfig(doc)
+	c.SetXMLDoc(doc)
 
 	return c, nil
 }
@@ -246,9 +264,11 @@ func isValidURL(configURL string) (bool, error) {
 	return true, nil
 }
 
-// getLOCKSSPropsURL retrieves the LOCKSS Property Configuration URL from the
-// specified on-disk LOCKSS configuration file.
-func getLOCKSSPropsURL(filename string, param string, ignorePrefix string) (string, error) {
+// getLocalDaemonConfig parses the local LOCKSS daemon configuration file
+// (usually /etc/lockss/config.dat) and returns a custom type wrapping a map
+// of key/value pairs representing available settings. Empty configuration
+// settings are returned.
+func getLocalDaemonConfig(filename string, ignorePrefix string) (daemonConfig, error) {
 
 	myFuncName := caller.GetFuncName()
 	cleanFilename := filepath.Clean(filename)
@@ -259,7 +279,7 @@ func getLOCKSSPropsURL(filename string, param string, ignorePrefix string) (stri
 
 	f, err := os.Open(filepath.Clean(filename))
 	if err != nil {
-		return "", fmt.Errorf(
+		return nil, fmt.Errorf(
 			"%s: error encountered opening file %q as %q: %w",
 			myFuncName,
 			filename,
@@ -281,11 +301,10 @@ func getLOCKSSPropsURL(filename string, param string, ignorePrefix string) (stri
 		}
 	}()
 
-	logger.Printf("%s: Searching for: %q", myFuncName, param)
-
 	s := bufio.NewScanner(f)
 	var lineno int
 	var cfgVar configVar
+	daemonConfig := make(daemonConfig)
 
 	// TODO: Does Scan() perform any whitespace manipulation already?
 	for s.Scan() {
@@ -322,25 +341,16 @@ func getLOCKSSPropsURL(filename string, param string, ignorePrefix string) (stri
 			}
 		}
 
-		logger.Printf(
-			"%s: Checking whether line %d is a match for %q: %q",
-			myFuncName,
-			lineno,
-			param,
-			currentLine,
-		)
-
 		// need to split on '='
 		fields := strings.Split(currentLine, "=")
 
 		// we're expecting a length of 2
 		// VARIABLE=VALUE, split becomes [VARIABLE VALUE]
 		if len(fields) != 2 {
-			return "", fmt.Errorf(
-				"%s: error parsing file %q to retrieve value for %q",
+			return nil, fmt.Errorf(
+				"%s: error parsing daemon config file %q",
 				myFuncName,
 				filepath.Clean(filename),
-				param,
 			)
 		}
 
@@ -348,45 +358,25 @@ func getLOCKSSPropsURL(filename string, param string, ignorePrefix string) (stri
 		cfgVar.Value = strings.TrimSpace(fields[1])
 		cfgVar.Value = strings.Trim(cfgVar.Value, `"'`)
 
-		if strings.EqualFold(cfgVar.Name, param) {
-			logger.Printf(
-				"%s: Match found on line %d for %q",
-				myFuncName,
-				lineno,
-				param,
-			)
-
-			// if we found what we're looking for, stop parsing the file
-			break
-		}
+		daemonConfig[cfgVar.Name] = cfgVar.Value
 
 	}
 
 	logger.Printf("%s: Exited s.Scan() loop", myFuncName)
 
-	// make sure that the value retrieved is usable, otherwise fail
-	if cfgVar.Value == "" {
-		return "", fmt.Errorf(
-			"%s: error retrieving value for %q; expected value is not set",
-			myFuncName,
-			param,
-		)
-	}
-
 	// report any errors encountered while scanning the input file
 	if err := s.Err(); err != nil {
-		return "", fmt.Errorf(
-			"%s: error encountered while scanning %q for %q: %w",
+		return nil, fmt.Errorf(
+			"%s: error encountered while scanning %q: %w",
 			myFuncName,
 			filepath.Clean(filename),
-			param,
 			err,
 		)
 	}
 
 	// explicitly close file, bail if failure occurs
 	if err := f.Close(); err != nil {
-		return "", fmt.Errorf(
+		return nil, fmt.Errorf(
 			"%s: failed to close file %q: %w",
 			myFuncName,
 			filepath.Clean(filename),
@@ -395,6 +385,6 @@ func getLOCKSSPropsURL(filename string, param string, ignorePrefix string) (stri
 	}
 
 	// otherwise, report that the requested param was not found
-	return cfgVar.Value, nil
+	return daemonConfig, nil
 
 }

@@ -40,4 +40,11 @@ const (
 	// ConfigFileCommentChar is the character used to indicate that a line is
 	// commented out in the local LOCKSS configuration file.
 	ConfigFileCommentChar string = "#"
+
+	// PropertiesGroupName is the group defined in the local LOCKSS daemon
+	// configuration file that the node is a member of. Membership in this
+	// group is required in order to receive certain settings, including
+	// collections of peer nodes. Not all LOCKSS networks will filter settings
+	// based on this group.
+	PropertiesGroupName string = "LOCKSS_TEST_GROUP"
 )
