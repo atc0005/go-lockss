@@ -25,7 +25,7 @@ func main() {
 
 	log.Debug("Initializing application")
 
-	// config.EnableLogging()
+	// lockss.EnableLogging()
 	lockss.DisableLogging()
 
 	// setup application configuration
@@ -43,6 +43,17 @@ func main() {
 		log.Errorf("failed to initialize application: %s", err)
 		flag.Usage()
 		os.Exit(1)
+	}
+
+	// if we have set the app logging level to Debug, enable lockss package
+	// logging too
+	// if logger, ok := log.Log.(*log.Logger); ok {
+	// 	if logger.Level == log.DebugLevel {
+	// 		lockss.EnableLogging()
+	// 	}
+	// }
+	if appCfg.LogLevel() == config.LogLevelDebug {
+		lockss.EnableLogging()
 	}
 
 	fmt.Printf(
@@ -122,21 +133,17 @@ func main() {
 	log.Debugf("%d peers listed in %s", len(peersList), cfgSource)
 
 	if appCfg.LogLevel() == config.LogLevelDebug {
-
 		for idx, peer := range peersList {
-			fmt.Printf("\n##########################################\n")
-			fmt.Printf("Peer %d: %+v\n", idx, peer)
-			fmt.Printf(
-				"Protocol: %q, IP Address: %q, Port: %d\n",
+			log.Debugf(
+				"Peer %d: [Protocol: %q, IP Address: %q, Port: %d, peer.Network(): %q, peer.String(): %q]",
+				idx,
 				peer.Protocol,
 				peer.IPAddress,
 				peer.LCAPPort,
+				peer.Network(),
+				peer.String(),
 			)
-
-			fmt.Println("peer.Network():", peer.Network())
-			fmt.Println("peer.String():", peer.String())
 		}
-
 	}
 
 	ports := append(appCfg.UserNodePorts(), peersList[0].LCAPPort)
@@ -181,7 +188,14 @@ func main() {
 		results = append(results, result)
 		remainingResponses--
 
-		log.Debugf("Still waiting on %d responses ...\n", remainingResponses)
+		if remainingResponses > 0 {
+			// skip emitting "Waiting" message if we're no longe waiting
+			log.Debugf("Waiting on %d responses ...", remainingResponses)
+			continue
+		}
+
+		log.Debug("All responses received")
+
 	}
 
 	results.PrintSummary()

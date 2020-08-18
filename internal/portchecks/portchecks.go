@@ -67,8 +67,8 @@ func CheckPort(netAddr net.Addr, port int, timeout time.Duration) Result {
 	// // force int64 to int type in order to fit into our Result struct
 	// port := int(portInt)
 
-	log.Debugf("Host: %s", host)
-	log.Debugf("Port: %d", port)
+	log.Debugf("%s: Host: %s", myFuncName, host)
+	log.Debugf("%s: Port: %d", myFuncName, port)
 
 	conn, err := net.DialTimeout(netAddr.Network(), netAddr.String(), timeout)
 	if err != nil {
