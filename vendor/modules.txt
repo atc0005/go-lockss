@@ -4,7 +4,7 @@ github.com/antchfx/xmlquery
 # github.com/antchfx/xpath v1.1.10
 ## explicit
 github.com/antchfx/xpath
-# github.com/apex/log v1.8.0
+# github.com/apex/log v1.9.0
 ## explicit
 github.com/apex/log
 github.com/apex/log/handlers/cli
