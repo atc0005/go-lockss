@@ -12,5 +12,5 @@ go 1.14
 require (
 	github.com/antchfx/xmlquery v1.2.4
 	github.com/antchfx/xpath v1.1.10 // indirect
-	github.com/apex/log v1.8.0
+	github.com/apex/log v1.9.0
 )
