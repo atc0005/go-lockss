@@ -100,7 +100,8 @@ func main() {
 			os.Exit(1)
 		}
 
-		cfgSource = lockssCfg.PropsURL
+		cfgSource = lockssCfg.PropsURL()
+
 	}
 
 	log.Debugf("Full LOCKSS config object: %+v", lockssCfg)
