@@ -141,7 +141,7 @@ func (c Config) String() string {
 	return fmt.Sprintf(
 		"Config: { ConfigFile: %v, ConfigServerURL: %v, ConfigServerReadTimeout: %v, "+
 			"PortConnectTimeout: %v, LogFormat: %v, LogLevel: %v, UserNodePorts: %v, "+
-			"ShortVersion: %v}",
+			"ShowVersion: %v}",
 		c.ConfigFile(),
 		c.ConfigServerURL(),
 		c.ConfigServerReadTimeout(),
