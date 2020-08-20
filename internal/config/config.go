@@ -50,7 +50,7 @@ const (
 	defaultDisplayVersionAndExit bool   = false
 	defaultConfigFile            string = ""
 	defaultConfigReadTimeout            = 10
-	defaultPortConnectTimeout           = 1
+	defaultPortConnectTimeout           = 2
 )
 
 // multiIntValueFlag is a custom type that satisfies the flag.Value interface
