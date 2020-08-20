@@ -327,6 +327,17 @@ func getLocalDaemonConfig(filename string, ignorePrefix string) (daemonConfig, e
 			currentLine,
 		)
 
+		// explicitly ignore blank lines
+		if currentLine == "" {
+			logger.Printf(
+				"%s: Line %d from %q appears to only contain whitespace, skipping ...",
+				myFuncName,
+				lineno,
+				filename,
+			)
+			continue
+		}
+
 		// explicitly ignore lines beginning with specified pattern, if
 		// provided
 		if ignorePrefix != "" {
