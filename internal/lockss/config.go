@@ -42,6 +42,12 @@ func New() (*Config, error) {
 
 	myFuncName := caller.GetFuncName()
 
+	logger.Printf(
+		"%s: parsing local LOCKSS daemon configuration file %q\n",
+		myFuncName,
+		DefaultConfigFile,
+	)
+
 	// parse the local LOCKSS Daemon configuration file for available settings
 	localDaemonCfg, err := getLocalDaemonConfig(DefaultConfigFile, ConfigFileCommentChar)
 	if err != nil {
@@ -51,6 +57,11 @@ func New() (*Config, error) {
 			DefaultConfigFile,
 		)
 	}
+
+	logger.Printf(
+		"%s: retrieving local LOCKSS daemon config settings",
+		myFuncName,
+	)
 
 	// Retrieve the URL configured within the local LOCKSS daemon
 	// configuration file

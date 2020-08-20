@@ -79,54 +79,193 @@ func (l IDInitialV3Peers) List() ([]V3Peer, error) {
 		)
 	}
 
-	peers := make([]V3Peer, 0, 5)
-
 	re, regExCompileErr := regexp.Compile(v3PeerRegex)
 	if regExCompileErr != nil {
 		return nil, fmt.Errorf("error compiling regex: %w", regExCompileErr)
 	}
 
-	xpathExpression := "//property[@name='org.lockss']/property[@name='id.initialV3PeerList']/list/value"
+	/*
+		    All of these XPath expressions appear to give the intended results
+		    of restricting peers to the 'test' element with a 'prod' attribute
+		    (the Preservation Group name).
 
-	xmlqueryNodes, err := xmlquery.QueryAll(l.xmlDoc, xpathExpression)
-	if err != nil {
+			---
+
+		    These expressions (first exact, the second more loose) apply a
+		    preceding sibling filter to a 'then' element, then descend the
+		    (exact) path to the peer list values.
+
+		   /lockss-config/property[@name='org.lockss']/if/then[preceding-sibling::or/test[@group='prod']]/property[@name='id.initialV3PeerList']/list/value
+		   //then[preceding-sibling::or/test[@group='prod']]/property[@name='id.initialV3PeerList']/list/value
+
+			---
+
+		   These expressions first target the 'test' element with a 'prod'
+		   attribute then walk back a specified number of steps (2 in this
+		   case) then descend the (exact) path to the peer list values.
+
+		   /lockss-config/property[@name='org.lockss']/if/or/test[@group='prod']/../../then/property[@name='id.initialV3PeerList']/list/value
+		   //test[@group='prod']/../../then/property[@name='id.initialV3PeerList']/list/value
+
+	*/
+
+	// xpathExpPresGroupUsed is an expression intended to determine if the
+	// Preservation Group is used as a restriction within the LOCKSS
+	// properties/configuration XML file.
+	xpathExpPresGroupUsed := fmt.Sprintf(
+		"//test[@group='%s']",
+		l.preservationGroup,
+	)
+
+	// xpathExpPeersNoGroup is used if the preservation group defined for this
+	// node is not in use within the LOCKSS properties/configuration XML file
+	xpathExpPeersNoGroup := "//property[@name='org.lockss']" +
+		"/property[@name='id.initialV3PeerList']/list/value"
+
+	// xpathExpPeersWithGroup is used if the preservation group defined for
+	// this node IS in use within the LOCKSS properties/configuration XML file
+	xpathExpPeersWithGroup := fmt.Sprintf(
+		"/lockss-config/property[@name='org.lockss']/if"+
+			"/then[preceding-sibling::or/test[@group='%s']]"+
+			"/property[@name='id.initialV3PeerList']/list/value",
+		l.preservationGroup,
+	)
+
+	logger.Printf(
+		"%s: using %q XPath expression to determine whether the %q preservation group is in use",
+		myFuncName,
+		xpathExpPresGroupUsed,
+		l.preservationGroup,
+	)
+	xmlQueryNodeGroupUsed, xmlQueryErr := xmlquery.Query(l.xmlDoc, xpathExpPresGroupUsed)
+	if xmlQueryErr != nil {
 		return nil, fmt.Errorf(
-			"%s: error occurred running XPath query: %w",
+			"%s: error occurred running XPath query %q: %w",
 			myFuncName,
-			err,
+			xpathExpPresGroupUsed,
+			xmlQueryErr,
 		)
 	}
 
-	// If the query failed to find a match then this will be nil. We should
-	// halt further attempts to retrieve more specific values.
-	if xmlqueryNodes == nil {
-		return nil, fmt.Errorf(
-			"%s: unable to query value using xpathExpression: %q",
+	// match preallocated slice size for []V3Peer)
+	xmlqueryNodes := make([]*xmlquery.Node, 0, 10)
+
+	switch {
+	// if the preservation group is in use ...
+	case xmlQueryNodeGroupUsed != nil:
+
+		logger.Printf("%s: %q preservation group IS in use", myFuncName, l.preservationGroup)
+
+		logger.Printf(
+			"%s: using %q XPath expression to retrieve group-based peer nodes",
 			myFuncName,
-			xpathExpression,
+			xpathExpPeersWithGroup,
 		)
+		xmlqueryNodes, xmlQueryErr = xmlquery.QueryAll(l.xmlDoc, xpathExpPeersWithGroup)
+		if xmlQueryErr != nil {
+			return nil, fmt.Errorf(
+				"%s: error occurred running XPath query %q: %w",
+				myFuncName,
+				xpathExpPeersWithGroup,
+				xmlQueryErr,
+			)
+		}
+
+		// If we didn't find any peer nodes restricted to this LOCKSS node's
+		// preservation group, maybe the preservation group is used to
+		// restrict other settings and *not* the peer nodes. Try again, this
+		// time without the preservation group restriction.
+		if xmlqueryNodes == nil {
+
+			logger.Printf(
+				"%s: Unable to retrieve group-based peer nodes using %q XPath expression",
+				myFuncName,
+				xpathExpPeersWithGroup,
+			)
+
+			logger.Printf(
+				"%s: using %q XPath expression to retrieve non-group peer nodes",
+				myFuncName,
+				xpathExpPeersNoGroup,
+			)
+			xmlqueryNodes, xmlQueryErr = xmlquery.QueryAll(l.xmlDoc, xpathExpPeersNoGroup)
+			if xmlQueryErr != nil {
+				return nil, fmt.Errorf(
+					"%s: error occurred running XPath query %q: %w",
+					myFuncName,
+					xpathExpPeersNoGroup,
+					xmlQueryErr,
+				)
+			}
+
+			// Give up if we were unable to find a match using either
+			// expression.
+			if xmlqueryNodes == nil {
+
+				logger.Printf(
+					"%s: unable to retrieve non-group peer nodes using %q XPath expression",
+					myFuncName,
+					xpathExpPeersNoGroup,
+				)
+
+				return nil, fmt.Errorf(
+					"%s: unable to retrieve peer nodes using XPath expression %q or %q",
+					myFuncName,
+					xpathExpPeersWithGroup,
+					xpathExpPeersNoGroup,
+				)
+			}
+		}
+
+	// if the preservation group is *NOT* in use ...
+	case xmlQueryNodeGroupUsed == nil:
+
+		logger.Printf("%s: %q preservation group is NOT in use", myFuncName, l.preservationGroup)
+
+		logger.Printf(
+			"%s: using %q XPath expression to retrieve non-group peer nodes",
+			myFuncName,
+			xpathExpPeersNoGroup,
+		)
+		xmlqueryNodes, xmlQueryErr = xmlquery.QueryAll(l.xmlDoc, xpathExpPeersNoGroup)
+		if xmlQueryErr != nil {
+			return nil, fmt.Errorf(
+				"%s: error occurred running XPath query %q: %w",
+				myFuncName,
+				xpathExpPeersNoGroup,
+				xmlQueryErr,
+			)
+		}
+
+		// Give up if we were unable to find a match.
+		if xmlqueryNodes == nil {
+
+			logger.Printf(
+				"%s: unable to retrieve non-group peer nodes using %q XPath expression",
+				myFuncName,
+				xpathExpPeersNoGroup,
+			)
+			return nil, fmt.Errorf(
+				"%s: unable to query value using xpathExpression: %q",
+				myFuncName,
+				xpathExpPeersNoGroup,
+			)
+		}
 	}
 
+	logger.Printf(
+		"%s: Successfully retrieved %d peer node search results",
+		myFuncName,
+		len(xmlqueryNodes),
+	)
+
+	peers := make([]V3Peer, 0, 10)
 	for _, prop := range xmlqueryNodes {
-		// fmt.Printf("Raw XML: %q\n", prop.OutputXML(true))
-		// fmt.Printf("Inner Text: %q\n", prop.InnerText())
-
-		// Trim away protocol/port to obtain IP Addresses
-		// TODO: Perhaps create a type instead that contains all values?
-		// if we split on ':', we can capture:
-		//
-		// TCP
-		// [1.2.3.4]
-		// 9729
-		//
-		// For the bracketed IP Address, we can just trim off the brackets
 		elementText := prop.InnerText()
-		// elementText = strings.TrimPrefix(elementText, "TCP:[")
-		// elementText = strings.TrimSuffix(elementText, "]:9729")
-
 		matches := re.FindStringSubmatch(elementText)
 
-		// we should only have one
+		// each "node" result should have a very specific number of fields
+		// that we will use to populate our V3Peers list
 		if len(matches) != v3PeerRegexExpectedMatches {
 			return nil, fmt.Errorf(
 				"%s: peer entry %q did not match expected format of '%s'",
@@ -138,7 +277,6 @@ func (l IDInitialV3Peers) List() ([]V3Peer, error) {
 
 		peerProtocol := matches[1]
 		peerIPAddress := matches[2]
-
 		peerPort, strConvErr := strconv.ParseInt(matches[3], 10, 32)
 		if strConvErr != nil {
 			return nil, fmt.Errorf(
@@ -154,6 +292,13 @@ func (l IDInitialV3Peers) List() ([]V3Peer, error) {
 			LCAPPort:  int(peerPort),
 		}
 
+		logger.Printf(
+			"%s: parsed peer [%s, %s, %d] from search results",
+			myFuncName,
+			peer.Protocol,
+			peer.IPAddress,
+			peer.LCAPPort,
+		)
 		peers = append(peers, peer)
 
 	}
