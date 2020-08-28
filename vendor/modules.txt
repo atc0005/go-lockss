@@ -1,8 +1,7 @@
-# github.com/antchfx/xmlquery v1.2.4
+# github.com/antchfx/xmlquery v1.3.0
 ## explicit
 github.com/antchfx/xmlquery
 # github.com/antchfx/xpath v1.1.10
-## explicit
 github.com/antchfx/xpath
 # github.com/apex/log v1.9.0
 ## explicit
@@ -26,7 +25,7 @@ github.com/mattn/go-colorable
 github.com/mattn/go-isatty
 # github.com/pkg/errors v0.8.1
 github.com/pkg/errors
-# golang.org/x/net v0.0.0-20200421231249-e086a090c8fd
+# golang.org/x/net v0.0.0-20200813134508-3edf25e44fcc
 golang.org/x/net/html
 golang.org/x/net/html/atom
 golang.org/x/net/html/charset
