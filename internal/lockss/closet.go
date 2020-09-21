@@ -57,7 +57,7 @@ func NewConfig(xmlDoc *xmlquery.Node) (LOCKSSConfig, error) {
 
 // Content pulled from n2n "main":
 
-//fmt.Printf("Parsed document: %+v\n", doc)
+// fmt.Printf("Parsed document: %+v\n", doc)
 
 // appExitOnce := xmlquery.Find(doc, "//property//property[@name='app.exitOnce']")
 // fmt.Printf("Find results = Type: %T, Value: %+v\n", appExitOnce, appExitOnce)
@@ -83,13 +83,13 @@ func NewConfig(xmlDoc *xmlquery.Node) (LOCKSSConfig, error) {
 // 	os.Exit(1)
 // }
 
-//fmt.Printf("Find results = Type: %T, Value: %+v\n", ipInclude, ipInclude)
+// fmt.Printf("Find results = Type: %T, Value: %+v\n", ipInclude, ipInclude)
 
 // for _, item := range ipInclude {
 // 	fmt.Printf("%+v\n", item)
 // }
 
-//fmt.Printf("%+v\n", ipInclude.SelectElements("property"))
+// fmt.Printf("%+v\n", ipInclude.SelectElements("property"))
 
 /*
 

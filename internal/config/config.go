@@ -214,13 +214,13 @@ func NewConfig() (*Config, error) {
 
 	log.Debug("Validating configuration ...")
 	if err := config.Validate(); err != nil {
-		//flag.Usage()
+		// flag.Usage()
 		// Let app handle this directly
 		return nil, err
 	}
 	log.Debug("Configuration validated")
 
-	//log.Debugf("Config object: %v", config.String())
+	// log.Debugf("Config object: %v", config.String())
 
 	return &config, nil
 
