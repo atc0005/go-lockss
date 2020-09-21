@@ -38,11 +38,11 @@ func (c *Config) handleFlagsConfig() {
 	flag.BoolVar(&c.showVersion, "v", defaultDisplayVersionAndExit, versionFlagHelp+" (shorthand)")
 
 	// create shorter and longer logging level flag options
-	flag.StringVar(&c.logLevel, "ll", defaultLogLevel, logLevelFlagHelp)
+	flag.StringVar(&c.logLevel, "ll", defaultLogLevel, logLevelFlagHelp+" (shorthand)")
 	flag.StringVar(&c.logLevel, "log-level", defaultLogLevel, logLevelFlagHelp)
 
 	// create shorter and longer logging format flag options
-	flag.StringVar(&c.logFormat, "lf", defaultLogFormat, logFormatFlagHelp)
+	flag.StringVar(&c.logFormat, "lf", defaultLogFormat, logFormatFlagHelp+" (shorthand)")
 	flag.StringVar(&c.logFormat, "log-format", defaultLogFormat, logFormatFlagHelp)
 
 	flag.Usage = flagsUsage()
