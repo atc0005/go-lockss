@@ -216,7 +216,7 @@ func (c *Config) loadFromPropsURLWithContext(ctx context.Context, url string) (*
 			string(responseData),
 		)
 		logger.Println(warningStatusCodeMsg)
-		//return nil, warningStatusCodeMsg
+		// return nil, warningStatusCodeMsg
 
 	}
 

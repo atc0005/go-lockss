@@ -19,7 +19,7 @@ import (
 // PrintSummary generates a table of all collected port check results
 func (rs Results) PrintSummary() {
 	w := new(tabwriter.Writer)
-	//w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, '.', tabwriter.AlignRight|tabwriter.Debug)
+	// w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, '.', tabwriter.AlignRight|tabwriter.Debug)
 
 	// Format in tab-separated columns
 	w.Init(os.Stdout, 16, 8, 8, '\t', 0)
@@ -36,7 +36,7 @@ func (rs Results) PrintSummary() {
 	fmt.Fprintln(w, "----\t----\t----\t-----\t")
 
 	sort.Slice(rs, func(i, j int) bool {
-		//return rs[i].Open < rs[j].Open
+		// return rs[i].Open < rs[j].Open
 		return rs[i].Open
 
 	})
