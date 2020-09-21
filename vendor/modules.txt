@@ -1,4 +1,4 @@
-# github.com/antchfx/xmlquery v1.3.0
+# github.com/antchfx/xmlquery v1.3.2
 ## explicit
 github.com/antchfx/xmlquery
 # github.com/antchfx/xpath v1.1.10

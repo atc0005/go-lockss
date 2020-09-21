@@ -6,11 +6,14 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"regexp"
 	"strings"
 
 	"github.com/antchfx/xpath"
 	"golang.org/x/net/html/charset"
 )
+
+var xmlMIMERegex = regexp.MustCompile(`(?i)((application|image|message|model)/((\w|\.|-)+\+?)?|text/)(wb)?xml`)
 
 // LoadURL loads the XML document from the specified URL.
 func LoadURL(url string) (*Node, error) {
@@ -19,7 +22,11 @@ func LoadURL(url string) (*Node, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	return Parse(resp.Body)
+	// Make sure the Content-Type has a valid XML MIME type
+	if xmlMIMERegex.MatchString(resp.Header.Get("Content-Type")) {
+		return Parse(resp.Body)
+	}
+	return nil, fmt.Errorf("invalid XML document(%s)", resp.Header.Get("Content-Type"))
 }
 
 // Parse returns the parse tree for the XML from the given Reader.
@@ -164,7 +171,11 @@ func (p *parser) parse() (*Node, error) {
 					if p.streamElementFilter == nil || QuerySelector(p.doc, p.streamElementFilter) != nil {
 						return p.streamNode, nil
 					}
-					// otherwise, this isn't our target node. clean things up.
+					// otherwise, this isn't our target node, clean things up.
+					// note we also remove the underlying *Node from the node tree, to prevent
+					// future stream node candidate selection error.
+					RemoveFromTree(p.streamNode)
+					p.prev = p.streamNodePrev
 					p.streamNode = nil
 					p.streamNodePrev = nil
 				}
