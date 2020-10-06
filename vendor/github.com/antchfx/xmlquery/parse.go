@@ -1,6 +1,7 @@
 package xmlquery
 
 import (
+	"bufio"
 	"encoding/xml"
 	"errors"
 	"fmt"
@@ -49,18 +50,21 @@ type parser struct {
 	space2prefix        map[string]string
 	level               int
 	prev                *Node
-	streamElementXPath  *xpath.Expr // Under streaming mode, this specifies the xpath to the target element node(s).
-	streamElementFilter *xpath.Expr // If specified, it provides a futher filtering on the target element.
-	streamNode          *Node       // Need to remmeber the last target node So we can clean it up upon next Read() call.
-	streamNodePrev      *Node       // Need to remember target node's prev so upon target node removal, we can restore correct prev.
+	streamElementXPath  *xpath.Expr   // Under streaming mode, this specifies the xpath to the target element node(s).
+	streamElementFilter *xpath.Expr   // If specified, it provides further filtering on the target element.
+	streamNode          *Node         // Need to remember the last target node So we can clean it up upon next Read() call.
+	streamNodePrev      *Node         // Need to remember target node's prev so upon target node removal, we can restore correct prev.
+	reader              *cachedReader // Need to maintain a reference to the reader, so we can determine whether a node contains CDATA.
 }
 
 func createParser(r io.Reader) *parser {
+	reader := newCachedReader(bufio.NewReader(r))
 	p := &parser{
-		decoder:      xml.NewDecoder(r),
+		decoder:      xml.NewDecoder(reader),
 		doc:          &Node{Type: DocumentNode},
 		space2prefix: make(map[string]string),
 		level:        0,
+		reader:       reader,
 	}
 	// http://www.w3.org/XML/1998/namespace is bound by definition to the prefix xml.
 	p.space2prefix["http://www.w3.org/XML/1998/namespace"] = "xml"
@@ -117,7 +121,7 @@ func (p *parser) parse() (*Node, error) {
 				Attr:         tok.Attr,
 				level:        p.level,
 			}
-			//fmt.Println(fmt.Sprintf("start > %s : %d", node.Data, node.level))
+
 			if p.level == p.prev.level {
 				AddSibling(p.prev, node)
 			} else if p.level > p.prev.level {
@@ -145,6 +149,7 @@ func (p *parser) parse() (*Node, error) {
 			}
 			p.prev = node
 			p.level++
+			p.reader.StartCaching()
 		case xml.EndElement:
 			p.level--
 			// If we're in streaming mode, and we already have a potential streaming
@@ -181,7 +186,15 @@ func (p *parser) parse() (*Node, error) {
 				}
 			}
 		case xml.CharData:
-			node := &Node{Type: CharDataNode, Data: string(tok), level: p.level}
+			p.reader.StopCaching()
+			// First, normalize the cache...
+			cached := strings.ToUpper(string(p.reader.Cache()))
+			nodeType := TextNode
+			if strings.HasPrefix(cached, "<![CDATA[") {
+				nodeType = CharDataNode
+			}
+
+			node := &Node{Type: nodeType, Data: string(tok), level: p.level}
 			if p.level == p.prev.level {
 				AddSibling(p.prev, node)
 			} else if p.level > p.prev.level {
@@ -192,6 +205,7 @@ func (p *parser) parse() (*Node, error) {
 				}
 				AddSibling(p.prev.Parent, node)
 			}
+			p.reader.StartCaching()
 		case xml.Comment:
 			node := &Node{Type: CommentNode, Data: string(tok), level: p.level}
 			if p.level == p.prev.level {
@@ -227,13 +241,16 @@ func (p *parser) parse() (*Node, error) {
 	}
 }
 
-// StreamParser enables loading and parsing an XML document in a streaming fashion.
+// StreamParser enables loading and parsing an XML document in a streaming
+// fashion.
 type StreamParser struct {
 	p *parser
 }
 
-// CreateStreamParser creates a StreamParser. Argument streamElementXPath is required.
-// Argument streamElementFilter is optional and should only be used in advanced scenarios.
+// CreateStreamParser creates a StreamParser. Argument streamElementXPath is
+// required.
+// Argument streamElementFilter is optional and should only be used in advanced
+// scenarios.
 //
 // Scenario 1: simple case:
 //  xml := `<AAA><BBB>b1</BBB><BBB>b2</BBB></AAA>`
@@ -268,12 +285,15 @@ type StreamParser struct {
 // Output will be:
 //   <BBB>b2</BBB>
 //
-// As the argument names indicate, streamElementXPath should be used for providing xpath query pointing
-// to the target element node only, no extra filtering on the element itself or its children; while
-// streamElementFilter, if needed, can provide additional filtering on the target element and its children.
+// As the argument names indicate, streamElementXPath should be used for
+// providing xpath query pointing to the target element node only, no extra
+// filtering on the element itself or its children; while streamElementFilter,
+// if needed, can provide additional filtering on the target element and its
+// children.
 //
-// CreateStreamParser returns error if either streamElementXPath or streamElementFilter, if provided, cannot
-// be successfully parsed and compiled into a valid xpath query.
+// CreateStreamParser returns an error if either streamElementXPath or
+// streamElementFilter, if provided, cannot be successfully parsed and compiled
+// into a valid xpath query.
 func CreateStreamParser(r io.Reader, streamElementXPath string, streamElementFilter ...string) (*StreamParser, error) {
 	elemXPath, err := getQuery(streamElementXPath)
 	if err != nil {
@@ -294,12 +314,13 @@ func CreateStreamParser(r io.Reader, streamElementXPath string, streamElementFil
 	return sp, nil
 }
 
-// Read returns a target node that satisifies the XPath specified by caller at StreamParser creation
-// time. If there is no more satisifying target node after reading the rest of the XML document, io.EOF
-// will be returned. At any time, any XML parsing error encountered, the error will be returned and
-// the stream parsing is stopped. Calling Read() after an error is returned (including io.EOF) is not
-// allowed the behavior will be undefined. Also note, due to the streaming nature, calling Read() will
-// automatically remove any previous target node(s) from the document tree.
+// Read returns a target node that satisfies the XPath specified by caller at
+// StreamParser creation time. If there is no more satisfying target nodes after
+// reading the rest of the XML document, io.EOF will be returned. At any time,
+// any XML parsing error encountered will be returned, and the stream parsing
+// stopped. Calling Read() after an error is returned (including io.EOF) results
+// undefined behavior. Also note, due to the streaming nature, calling Read()
+// will automatically remove any previous target node(s) from the document tree.
 func (sp *StreamParser) Read() (*Node, error) {
 	// Because this is a streaming read, we need to release/remove last
 	// target node from the node tree to free up memory.
