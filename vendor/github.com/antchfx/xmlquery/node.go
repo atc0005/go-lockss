@@ -14,8 +14,8 @@ const (
 	// DocumentNode is a document object that, as the root of the document tree,
 	// provides access to the entire XML document.
 	DocumentNode NodeType = iota
-	// DeclarationNode is the document type declaration, indicated by the following
-	// tag (for example, <!DOCTYPE...> ).
+	// DeclarationNode is the document type declaration, indicated by the
+	// following tag (for example, <!DOCTYPE...> ).
 	DeclarationNode
 	// ElementNode is an element (for example, <item> ).
 	ElementNode
@@ -82,8 +82,13 @@ func calculatePreserveSpaces(n *Node, pastValue bool) bool {
 func outputXML(buf *bytes.Buffer, n *Node, preserveSpaces bool) {
 	preserveSpaces = calculatePreserveSpaces(n, preserveSpaces)
 	switch n.Type {
-	case TextNode, CharDataNode:
+	case TextNode:
 		xml.EscapeText(buf, []byte(n.sanitizedData(preserveSpaces)))
+		return
+	case CharDataNode:
+		buf.WriteString("<![CDATA[")
+		xml.EscapeText(buf, []byte(n.sanitizedData(preserveSpaces)))
+		buf.WriteString("]]>")
 		return
 	case CommentNode:
 		buf.WriteString("<!--")
