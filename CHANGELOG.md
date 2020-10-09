@@ -30,20 +30,41 @@ The following types of changes will be recorded in this file:
 
 ### Added
 
-- static binaries
+- Statically linked binary release
+  - Built using Go 1.15.2
+  - Native Go binaries (no cgo)
+  - Windows
+    - x86
+    - x64
+  - Linux
+    - x86
+    - x64
 
 ### Changed
 
-- builds
-- deps
+- Dependencies
+  - `antchfx/xmlquery`
+    - `v1.2.4` to `v1.3.3`
+  - `actions/checkout`
+    - `v2.3.2` to `v2.3.3`
+  - `actions/setup-node`
+    - `v2.1.1` to `v2.1.2`
+
+- Build options updated
+  - Add `-trimpath` build flag
+  - Explicitly disable cgo
+  - Apply `osusergo` and `netgo` build tags
+    - help ensure static builds that are not dependent on glibc
 
 ### Fixed
 
 - YYYY-MM-DD format of changelog entries
   - previous release
-
-- builds
-- config handling
+- gocritic commentFormatting linting errors
+- Add missing shorthand suffix in flags help text
+- Makefile generates checksums with qualified path
+- Makefile build options do not generate static binaries
+- (Some) getter methods do not appear to return intended default values
 
 ## [v0.1.2] - 2020-8-20
 
@@ -139,7 +160,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.3...HEAD
+[v0.1.3]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.3
 [v0.1.2]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.2
 [v0.1.1]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.1
 [v0.1.0]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.0
