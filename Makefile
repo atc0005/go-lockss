@@ -60,10 +60,15 @@ VERSION 				= $(shell git describe --always --long --dirty)
 #	Use pure Go implementation of user and group id/name resolution.
 #	Use pure Go implementation of DNS resolver.
 #
+# -trimpath
+#	https://golang.org/cmd/go/
+#   removes all file system paths from the compiled executable, to improve
+#   build reproducibility.
+#
 # CGO_ENABLED=0
 #	https://golang.org/cmd/cgo/
 #	explicitly disable use of cgo
-BUILDCMD				=	CGO_ENABLED=0 go build -mod=vendor -a -tags 'osusergo,netgo' -ldflags="-s -w -X $(VERSION_VAR_PKG).Version=$(VERSION)"
+BUILDCMD				=	CGO_ENABLED=0 go build -mod=vendor -a -trimpath -tags 'osusergo,netgo' -ldflags="-s -w -X $(VERSION_VAR_PKG).Version=$(VERSION)"
 GOCLEANCMD				=	go clean -mod=vendor ./...
 GITCLEANCMD				= 	git clean -xfd
 CHECKSUMCMD				=	sha256sum -b
