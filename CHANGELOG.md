@@ -26,6 +26,25 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.3] - 2020-10-09
+
+### Added
+
+- static binaries
+
+### Changed
+
+- builds
+- deps
+
+### Fixed
+
+- YYYY-MM-DD format of changelog entries
+  - previous release
+
+- builds
+- config handling
+
 ## [v0.1.2] - 2020-8-20
 
 ### Added

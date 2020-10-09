@@ -33,44 +33,44 @@ func (c Config) UserNodePorts() []int {
 	}
 }
 
-// LogLevel returns the user-provided logging level or empty string if not
-// provided. CLI flag values take precedence if provided.
+// LogLevel returns the user-provided logging level or default log level if
+// not provided. CLI flag values take precedence if provided.
 func (c Config) LogLevel() string {
 
 	switch {
 	case c.logLevel != "":
 		return c.logLevel
 	default:
-		return ""
+		return defaultLogLevel
 	}
 }
 
-// LogFormat returns the user-provided logging format or empty string if not
-// provided. CLI flag values take precedence if provided.
+// LogFormat returns the user-provided logging format or default log format if
+// not provided. CLI flag values take precedence if provided.
 func (c Config) LogFormat() string {
 
 	switch {
 	case c.logFormat != "":
 		return c.logFormat
 	default:
-		return ""
+		return defaultLogFormat
 	}
 }
 
 // ConfigServerURL returns the user-provided URL to the LOCKSS
-// configuration/property XML file.
+// configuration/property XML file or the default value if not provided.
 func (c Config) ConfigServerURL() string {
 
 	switch {
 	case c.configServerURL != "":
 		return c.configServerURL
 	default:
-		return ""
+		return defaultConfigServerURL
 	}
 }
 
 // ConfigFile returns the user-provided path to the on-disk LOCKSS
-// configuration/property XML file.
+// configuration/property XML file or the default value if not provided.
 func (c Config) ConfigFile() string {
 
 	switch {
