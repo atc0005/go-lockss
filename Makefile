@@ -43,7 +43,27 @@ VERSION 				= $(shell git describe --always --long --dirty)
 
 # The default `go build` process embeds debugging information. Building
 # without that debugging information reduces the binary size by around 28%.
-BUILDCMD				=	go build -mod=vendor -a -ldflags="-s -w -X $(VERSION_VAR_PKG).Version=$(VERSION)"
+#
+# We also include additional flags in an effort to generate static binaries
+# that do not have external dependencies. As of Go 1.15 this still appears to
+# be a mixed bag, so YMMV.
+#
+# See https://github.com/golang/go/issues/26492 for more information.
+#
+# -s
+#	Omit the symbol table and debug information.
+#
+# -w
+#	Omit the DWARF symbol table.
+#
+# -tags 'osusergo,netgo'
+#	Use pure Go implementation of user and group id/name resolution.
+#	Use pure Go implementation of DNS resolver.
+#
+# CGO_ENABLED=0
+#	https://golang.org/cmd/cgo/
+#	explicitly disable use of cgo
+BUILDCMD				=	CGO_ENABLED=0 go build -mod=vendor -a -tags 'osusergo,netgo' -ldflags="-s -w -X $(VERSION_VAR_PKG).Version=$(VERSION)"
 GOCLEANCMD				=	go clean -mod=vendor ./...
 GITCLEANCMD				= 	git clean -xfd
 CHECKSUMCMD				=	sha256sum -b
