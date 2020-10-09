@@ -49,6 +49,7 @@ const (
 	defaultLogFormat             string = "text"
 	defaultDisplayVersionAndExit bool   = false
 	defaultConfigFile            string = ""
+	defaultConfigServerURL       string = ""
 	defaultConfigReadTimeout            = 10
 	defaultPortConnectTimeout           = 2
 )

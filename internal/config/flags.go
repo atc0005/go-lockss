@@ -22,8 +22,8 @@ func (c *Config) handleFlagsConfig() {
 	flag.Var(&c.nodePorts, "p", nodePortFlagHelp+" (shorthand)")
 	flag.Var(&c.nodePorts, "port", nodePortFlagHelp)
 
-	flag.StringVar(&c.configServerURL, "cs", "", configServerURLFlagHelp+" (shorthand)")
-	flag.StringVar(&c.configServerURL, "config-server", "", configServerURLFlagHelp)
+	flag.StringVar(&c.configServerURL, "cs", defaultConfigServerURL, configServerURLFlagHelp+" (shorthand)")
+	flag.StringVar(&c.configServerURL, "config-server", defaultConfigServerURL, configServerURLFlagHelp)
 
 	flag.IntVar(&c.configServerReadTimeout, "ct", defaultConfigReadTimeout, configReadTimeoutFlagHelp+" (shorthand)")
 	flag.IntVar(&c.configServerReadTimeout, "config-read-timeout", defaultConfigReadTimeout, configReadTimeoutFlagHelp)
