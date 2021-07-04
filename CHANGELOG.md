@@ -26,6 +26,35 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.4] - 2021-07-04
+
+### Overview
+
+- Dependency updates
+- built using Go 1.16.5
+  - Statically linked
+  - Linux (x86, x64)
+
+### Added
+
+- Create "canary" Dockerfile to track stable Go releases, serve as a reminder
+  to generate fresh binaries
+
+### Changed
+
+- Swap out GoDoc badge for pkg.go.dev badge
+- Dependencies
+  - `Go`
+    - `1.15.2` to `1.16.5`
+  - `antchfx/xmlquery`
+    - `v1.3.3` to `v1.3.6`
+  - `actions/setup-node`
+    - `v1.3.3` to `v1.3.4`
+  - `actions/checkout`
+    - `v2.3.3` to `v2.3.4`
+  - `actions/setup-node`
+    - `v2.1.2` to `v2.2.0`
+
 ## [v0.1.3] - 2020-10-09
 
 ### Added
@@ -160,7 +189,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.4...HEAD
+[v0.1.4]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.4
 [v0.1.3]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.3
 [v0.1.2]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.2
 [v0.1.1]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.1
