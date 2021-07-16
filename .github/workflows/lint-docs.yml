@@ -26,8 +26,7 @@ jobs:
         # https://github.com/actions/setup-node
         uses: actions/setup-node@v2.2.0
         with:
-          # https://nodejs.org/en/about/releases/
-          node-version: "12"
+          node-version: "lts/*"
 
       - name: Install Markdown linting tools
         run: |
