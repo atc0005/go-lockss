@@ -26,6 +26,24 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.6] - 2021-08-08
+
+### Overview
+
+- Dependency updates
+- built using Go 1.16.7
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.16.6` to `1.16.7`
+  - `actions/setup-node`
+    - updated from `v2.2.0` to `v2.4.0`
+
 ## [v0.1.5] - 2021-07-16
 
 ### Overview
@@ -207,7 +225,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.6...HEAD
+[v0.1.6]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.6
 [v0.1.5]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.5
 [v0.1.4]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.4
 [v0.1.3]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.3
