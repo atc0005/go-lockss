@@ -21,6 +21,8 @@ Go-based tooling for monitoring and troubleshooting LOCKSS nodes.
 - [Changelog](#changelog)
 - [Requirements](#requirements)
 - [How to install it](#how-to-install-it)
+  - [From source](#from-source)
+  - [Using release binaries](#using-release-binaries)
 - [Configuration](#configuration)
   - [Command-line arguments](#command-line-arguments)
     - [Threshold calculations](#threshold-calculations)
@@ -101,6 +103,8 @@ Tested using:
 
 ## How to install it
 
+### From source
+
 1. [Download](https://golang.org/dl/) Go
 1. [Install](https://golang.org/doc/install) Go
 1. Clone the repo
@@ -127,6 +131,15 @@ Tested using:
    - if using `Makefile`: look in the subdirectories within
      `/tmp/go-lockss/release_assets/`
    - if using `go build`: look in `/tmp/go-lockss/`
+
+### Using release binaries
+
+1. Download the [latest
+   release](https://github.com/atc0005/go-lockss/releases/latest) binaries
+1. Deploy
+   - Place `hayoh` in a location of your choice
+     - e.g., `/usr/local/bin/` (ongoing use) or `$HOME/` (one-off
+       use)
 
 ## Configuration
 
