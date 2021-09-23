@@ -26,6 +26,24 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.7] - 2021-09-23
+
+### Overview
+
+- Dependency updates
+- built using Go 1.16.8
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.16.7` to `1.16.8`
+  - `antchfx/xmlquery`
+    - `v1.3.6` to `v1.3.7`
+
 ## [v0.1.6] - 2021-08-08
 
 ### Overview
@@ -225,7 +243,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.7...HEAD
+[v0.1.7]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.7
 [v0.1.6]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.6
 [v0.1.5]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.5
 [v0.1.4]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.4
