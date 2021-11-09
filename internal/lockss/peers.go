@@ -79,6 +79,9 @@ func (l IDInitialV3Peers) List() ([]V3Peer, error) {
 		)
 	}
 
+	// nolint:gocritic
+	// refs https://github.com/atc0005/go-lockss/issues/96
+	// refs https://github.com/go-critic/go-critic/issues/209
 	re, regExCompileErr := regexp.Compile(v3PeerRegex)
 	if regExCompileErr != nil {
 		return nil, fmt.Errorf("error compiling regex: %w", regExCompileErr)

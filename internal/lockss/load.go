@@ -78,6 +78,10 @@ func (c *Config) loadFromPropsFile(filename string) (*Config, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error occurred opening file: %w", err)
 	}
+
+	// #nosec G307
+	// Believed to be a false-positive from recent gosec release
+	// https://github.com/securego/gosec/issues/714
 	defer func() {
 		if err := f.Close(); err != nil {
 			logger.Printf(
@@ -287,6 +291,10 @@ func getLocalDaemonConfig(filename string, ignorePrefix string) (daemonConfig, e
 			err,
 		)
 	}
+
+	// #nosec G307
+	// Believed to be a false-positive from recent gosec release
+	// https://github.com/securego/gosec/issues/714
 	defer func() {
 		if err := f.Close(); err != nil {
 			// Ignore "file already closed" errors
