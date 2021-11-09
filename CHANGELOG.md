@@ -26,6 +26,35 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.8] - 2021-11-09
+
+### Overview
+
+- Dependency updates
+- built using Go 1.16.10
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.16.8` to `1.16.10`
+  - `antchfx/xmlquery`
+    - `v1.3.7` to `v1.3.8`
+  - `actions/checkout`
+    - `v2.3.4` to `v2.4.0`
+  - `actions/setup-node`
+    - `v2.4.0` to `v2.4.1`
+
+### Fixed
+
+- (GH-97) False positive `G307: Deferring unsafe method "Close" on type
+  "*os.File" (gosec)` linting error
+- (GH-96) `regexpMust: for const patterns like v3PeerRegex, use
+  regexp.MustCompile (gocritic)` linting error
+
 ## [v0.1.7] - 2021-09-23
 
 ### Overview
@@ -243,7 +272,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.7...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.8...HEAD
+[v0.1.8]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.8
 [v0.1.7]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.7
 [v0.1.6]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.6
 [v0.1.5]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.5
