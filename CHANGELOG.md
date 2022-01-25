@@ -26,6 +26,24 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.10] - 2022-01-25
+
+### Overview
+
+- Dependency updates
+- built using Go 1.17.6
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.16.12` to `1.17.6`
+    - (GH-107) Update go.mod file, canary Dockerfile to reflect current
+      dependencies
+
 ## [v0.1.9] - 2021-12-29
 
 ### Overview
@@ -292,7 +310,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.9...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.10...HEAD
+[v0.1.10]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.10
 [v0.1.9]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.9
 [v0.1.8]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.8
 [v0.1.7]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.7
