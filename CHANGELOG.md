@@ -26,6 +26,36 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.11] - 2022-03-03
+
+### Overview
+
+- Dependency updates
+- built using Go 1.17.7
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.17.6` to `1.17.7`
+  - `actions/checkout`
+    - `v2.4.0` to `v3`
+  - `actions/setup-node`
+    - `v2.5.1` to `v3`
+
+- (GH-111) Expand linting GitHub Actions Workflow to include `oldstable`,
+  `unstable` container images
+- (GH-112) Switch Docker image source from Docker Hub to GitHub Container
+  Registry (GHCR)
+
+### Fixed
+
+- (GH-114) var-declaration: should omit type string from declaration of var
+  (revive)
+
 ## [v0.1.10] - 2022-01-25
 
 ### Overview
@@ -310,7 +340,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.10...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.11...HEAD
+[v0.1.11]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.11
 [v0.1.10]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.10
 [v0.1.9]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.9
 [v0.1.8]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.8
