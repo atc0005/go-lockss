@@ -10,12 +10,12 @@ module github.com/atc0005/go-lockss
 go 1.17
 
 require (
-	github.com/antchfx/xmlquery v1.3.10
+	github.com/antchfx/xmlquery v1.3.11
 	github.com/apex/log v1.9.0
 )
 
 require (
-	github.com/antchfx/xpath v1.2.0 // indirect
+	github.com/antchfx/xpath v1.2.1 // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/go-logfmt/logfmt v0.4.0 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
