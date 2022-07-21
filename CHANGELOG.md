@@ -26,6 +26,30 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.13] - 2022-07-21
+
+### Overview
+
+- Bug fixes
+- Dependency updates
+- built using Go 1.17.12
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.17.9` to `1.17.12`
+  - `antchfx/xmlquery`
+    - `v1.3.10` to `v1.3.11`
+
+### Fixed
+
+- (GH-130) Update lintinstall Makefile recipe
+- (GH-132) Fix Markdownlint references
+
 ## [v0.1.12] - 2022-05-06
 
 ### Overview
@@ -358,7 +382,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.12...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.13...HEAD
+[v0.1.13]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.13
 [v0.1.12]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.12
 [v0.1.11]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.11
 [v0.1.10]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.10
