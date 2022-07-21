@@ -114,8 +114,8 @@ been tested.
 
 ### From source
 
-1. [Download](https://golang.org/dl/) Go
-1. [Install](https://golang.org/doc/install) Go
+1. [Download][go-docs-download] Go
+1. [Install][go-docs-install] Go
 1. Clone the repo
    1. `cd /tmp`
    1. `git clone https://github.com/atc0005/go-lockss`
@@ -276,3 +276,15 @@ SOFTWARE.
 
 Various references used when developing this project can be found in our
 [references](docs/references.md) doc.
+
+<!-- Footnotes here  -->
+
+[repo-url]: <https://github.com/atc0005/go-lockss>  "This project's GitHub repo"
+
+[go-docs-download]: <https://golang.org/dl>  "Download Go"
+
+[go-docs-install]: <https://golang.org/doc/install>  "Install Go"
+
+[go-supported-releases]: <https://go.dev/doc/devel/release#policy> "Go Release Policy"
+
+<!-- []: PLACEHOLDER "DESCRIPTION_HERE" -->
