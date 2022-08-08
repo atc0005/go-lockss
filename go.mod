@@ -10,7 +10,7 @@ module github.com/atc0005/go-lockss
 go 1.17
 
 require (
-	github.com/antchfx/xmlquery v1.3.11
+	github.com/antchfx/xmlquery v1.3.12
 	github.com/apex/log v1.9.0
 )
 
@@ -23,7 +23,7 @@ require (
 	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/mattn/go-isatty v0.0.8 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
-	golang.org/x/net v0.0.0-20200813134508-3edf25e44fcc // indirect
-	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd // indirect
-	golang.org/x/text v0.3.2 // indirect
+	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd // indirect
+	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect
+	golang.org/x/text v0.3.7 // indirect
 )
