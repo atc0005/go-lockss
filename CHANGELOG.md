@@ -26,6 +26,30 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.14] - 2022-08-24
+
+### Overview
+
+- Bug fixes
+- Dependency updates
+- built using Go 1.17.13
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.17.12` to `1.17.13`
+  - `antchfx/xmlquery`
+    - `v1.3.11` to `v1.3.12`
+
+### Fixed
+
+- (GH-135) Apply Go 1.19 specific doc comments linting fixes
+- (GH-136) Swap io/ioutil package for io package
+
 ## [v0.1.13] - 2022-07-21
 
 ### Overview
@@ -382,7 +406,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.13...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.14...HEAD
+[v0.1.14]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.14
 [v0.1.13]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.13
 [v0.1.12]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.12
 [v0.1.11]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.11
