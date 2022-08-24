@@ -13,7 +13,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -185,7 +185,7 @@ func (c *Config) loadFromPropsURLWithContext(ctx context.Context, url string) (*
 
 	// Get the response body directly. We'll create a bytes buffer later to
 	// wrap the response data in order to provide an io.Reader where needed.
-	responseData, err := ioutil.ReadAll(resp.Body)
+	responseData, err := io.ReadAll(resp.Body)
 	if err != nil {
 		logger.Println(err)
 		return nil, err
