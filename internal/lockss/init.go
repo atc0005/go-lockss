@@ -8,7 +8,7 @@
 package lockss
 
 import (
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 )
@@ -24,7 +24,7 @@ func init() {
 	// Disable logging output by default unless client code explicitly
 	// requests it
 	logger = log.New(os.Stderr, "[go-lockss/lockss] ", 0)
-	logger.SetOutput(ioutil.Discard)
+	logger.SetOutput(io.Discard)
 
 }
 
@@ -39,5 +39,5 @@ func EnableLogging() {
 // all logging output.
 func DisableLogging() {
 	logger.SetFlags(0)
-	logger.SetOutput(ioutil.Discard)
+	logger.SetOutput(io.Discard)
 }
