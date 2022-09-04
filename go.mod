@@ -7,7 +7,7 @@
 
 module github.com/atc0005/go-lockss
 
-go 1.17
+go 1.19
 
 require (
 	github.com/antchfx/xmlquery v1.3.12
