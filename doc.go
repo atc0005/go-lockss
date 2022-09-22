@@ -28,11 +28,6 @@ whether the node is accessible for polling, voting and repair purposes.
   - User configurable *additional* TCP ports to check; the default is to scan
     the LCAP port provided in the LOCKSS configuration/property XML file
 
-# KNOWN ISSUES
-
-  - The prototype `cmd/n2n` binary is a stub application, not usable in its
-    current form.
-
 # USAGE
 
   - Use the `--help` flag for current options
