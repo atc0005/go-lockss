@@ -17,7 +17,6 @@ Go-based tooling for monitoring and troubleshooting LOCKSS nodes.
 - [Overview](#overview)
 - [Status](#status)
 - [Features](#features)
-- [Known Issues](#known-issues)
 - [Changelog](#changelog)
 - [Requirements](#requirements)
   - [Building source code](#building-source-code)
@@ -27,10 +26,7 @@ Go-based tooling for monitoring and troubleshooting LOCKSS nodes.
   - [Using release binaries](#using-release-binaries)
 - [Configuration](#configuration)
   - [Command-line arguments](#command-line-arguments)
-    - [Threshold calculations](#threshold-calculations)
-    - [Shared](#shared)
     - [`hayoh`](#hayoh)
-    - [`n2n`](#n2n)
     - [Worth noting](#worth-noting)
 - [Examples](#examples)
   - [`hayoh`](#hayoh-1)
@@ -72,11 +68,6 @@ additional "bake time" has occurred.
 - User configurable *additional* TCP ports to check
   - the default is to scan the LCAP port provided in the LOCKSS
     configuration/property XML file
-
-## Known Issues
-
-- The prototype `cmd/n2n` binary is a stub application, not usable in its
-  current form.
 
 ## Changelog
 
@@ -154,16 +145,7 @@ been tested.
 
 ### Command-line arguments
 
-#### Threshold calculations
-
-- Placeholder
-
-This section is intended to cover the calculations used to determine WARNING
-and CRITICAL Nagios service check threshold values. As of this writing no such
-Nagios plugin exists in this repo, though it is likely that the `n2n` stub
-application will be repurposed for that.
-
-#### Shared
+#### `hayoh`
 
 - Flags marked as **`required`** must be set via CLI flag
 - Flags *not* marked as required are for settings where a useful default is
@@ -180,14 +162,6 @@ application will be repurposed for that.
 | `lf`, `log-format`          | No       | `text`                   | No      | `cli`, `json`, `logfmt`, `text`, `discard` | Use the specified `apex/log` package "handler" to output log messages in that handler's format.                                                                                                                                                                                    |
 | `pt`, `port-timeout`        | No       | `2`                      | No      | *any positive whole number*                | Maximum number of seconds allowed for a connection test against a remote TCP port before timing out.                                                                                                                                                                               |
 | `ct`, `config-read-timeout` | No       | `10`                     | No      | *any positive whole number*                | Maximum number of seconds allowed for a request for the LOCKSS configuration XML file before timing out.                                                                                                                                                                           |
-
-#### `hayoh`
-
-- placeholder
-
-#### `n2n`
-
-- placeholder
 
 #### Worth noting
 
