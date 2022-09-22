@@ -26,6 +26,34 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.15] - 2022-09-22
+
+### Overview
+
+- Bug fixes
+- Dependency updates
+- GitHub Actions Workflows updates
+- built using Go 1.19.1
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.17.13` to `1.19.1`
+  - `github/codeql-action`
+    - `v2.1.22` to `v2.1.25`
+- (GH-139) Update project to Go 1.19
+- (GH-140) Update Makefile and GitHub Actions Workflows
+- (GH-141) Remove prototype `cmd/n2n` binary
+- (GH-142) Add CodeQL GitHub Action Workflow
+
+### Fixed
+
+- (GH-138) Add missing cmd doc files
+
 ## [v0.1.14] - 2022-08-24
 
 ### Overview
@@ -406,7 +434,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.14...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.15...HEAD
+[v0.1.15]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.15
 [v0.1.14]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.14
 [v0.1.13]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.13
 [v0.1.12]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.12
