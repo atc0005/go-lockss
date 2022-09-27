@@ -5,10 +5,10 @@ Go-based tooling for monitoring and troubleshooting LOCKSS nodes.
 
 [![Latest Release](https://img.shields.io/github/release/atc0005/go-lockss.svg?style=flat-square)](https://github.com/atc0005/go-lockss/releases/latest)
 [![Go Reference](https://pkg.go.dev/badge/github.com/atc0005/go-lockss.svg)](https://pkg.go.dev/github.com/atc0005/go-lockss)
-[![Validate Codebase](https://github.com/atc0005/go-lockss/workflows/Validate%20Codebase/badge.svg)](https://github.com/atc0005/go-lockss/actions?query=workflow%3A%22Validate+Codebase%22)
-[![Validate Docs](https://github.com/atc0005/go-lockss/workflows/Validate%20Docs/badge.svg)](https://github.com/atc0005/go-lockss/actions?query=workflow%3A%22Validate+Docs%22)
-[![Lint and Build using Makefile](https://github.com/atc0005/go-lockss/workflows/Lint%20and%20Build%20using%20Makefile/badge.svg)](https://github.com/atc0005/go-lockss/actions?query=workflow%3A%22Lint+and+Build+using+Makefile%22)
-[![Quick Validation](https://github.com/atc0005/go-lockss/workflows/Quick%20Validation/badge.svg)](https://github.com/atc0005/go-lockss/actions?query=workflow%3A%22Quick+Validation%22)
+[![go.mod Go version](https://img.shields.io/github/go-mod/go-version/atc0005/go-lockss)](https://github.com/atc0005/go-lockss)
+[![Lint and Build](https://github.com/atc0005/go-lockss/actions/workflows/lint-and-build.yml/badge.svg)](https://github.com/atc0005/go-lockss/actions/workflows/lint-and-build.yml)
+[![Project Analysis](https://github.com/atc0005/go-lockss/actions/workflows/project-analysis.yml/badge.svg)](https://github.com/atc0005/go-lockss/actions/workflows/project-analysis.yml)
+[![Push Validation](https://github.com/atc0005/go-lockss/actions/workflows/push-validation.yml/badge.svg)](https://github.com/atc0005/go-lockss/actions/workflows/push-validation.yml)
 
 <!-- omit in toc -->
 ## Table of contents
