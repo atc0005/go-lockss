@@ -26,6 +26,56 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.16] - 2022-12-09
+
+### Overview
+
+- Bug fixes
+- Dependency updates
+- GitHub Actions Workflows updates
+- built using Go 1.19.4
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.19.1` to `1.19.4`
+  - `github.com/antchfx/xmlquery`
+    - `v1.3.12` to `v1.3.13`
+  - `github.com/mattn/go-colorable`
+    - `v0.1.2` to `v0.1.13`
+  - `github.com/mattn/go-isatty`
+    - `v0.0.8` to `v0.0.16`
+  - `golang.org/x/sys`
+    - `v0.0.0-20211216021012-1d35b9e2eb4e` to `v0.3.0`
+  - `golang.org/x/text`
+    - `v0.3.7` to `v0.5.0`
+  - `golang.org/x/net`
+    - `v0.0.0-20220127200216-cd36cc0744dd` to `v0.4.0`
+  - `github.com/golang/groupcache`
+    - `v0.0.0-20200121045136-8c9f03a8e57e` to
+      `v0.0.0-20210331224755-41bb18bfe9da`
+  - `github.com/golang/gddo`
+    - `v0.0.0-20200715224205-051695c33a3f` to
+      `v0.0.0-20210115222349-20d68f94ee1f`
+  - `github.com/fatih/color`
+    - `v1.7.0` to `v1.13.0`
+  - `github.com/go-logfmt/logfmt`
+    - `v0.4.0` to `v0.5.1`
+  - `github.com/pkg/errors`
+    - `v0.8.1` to `v0.9.1`
+  - `github.com/kr/logfmt`
+    - `v0.0.0-20140226030751-b84e30acd515` to
+      `v0.0.0-20210122060352-19f9bcb100e6`
+- (GH-149) Refactor GitHub Actions workflows to import logic
+
+### Fixed
+
+- (GH-153) Fix Makefile Go module base path detection
+
 ## [v0.1.15] - 2022-09-22
 
 ### Overview
@@ -434,7 +484,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.15...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.16...HEAD
+[v0.1.16]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.16
 [v0.1.15]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.15
 [v0.1.14]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.14
 [v0.1.13]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.13
