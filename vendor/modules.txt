@@ -1,7 +1,7 @@
 # github.com/antchfx/xmlquery v1.3.13
 ## explicit; go 1.14
 github.com/antchfx/xmlquery
-# github.com/antchfx/xpath v1.2.1
+# github.com/antchfx/xpath v1.2.2
 ## explicit; go 1.14
 github.com/antchfx/xpath
 # github.com/apex/log v1.9.0
