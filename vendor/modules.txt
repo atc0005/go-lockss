@@ -15,7 +15,7 @@ github.com/apex/log/handlers/text
 # github.com/fatih/color v1.14.1
 ## explicit; go 1.17
 github.com/fatih/color
-# github.com/go-logfmt/logfmt v0.5.1
+# github.com/go-logfmt/logfmt v0.6.0
 ## explicit; go 1.17
 github.com/go-logfmt/logfmt
 # github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da
