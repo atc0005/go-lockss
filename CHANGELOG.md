@@ -26,6 +26,54 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.1.17] - 2023-04-12
+
+### Overview
+
+- Bug fixes
+- Dependency updates
+- GitHub Actions workflow updates
+- built using Go 1.19.8
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Added
+
+- (GH-165) Add Go Module Validation, Dependency Updates jobs
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.19.4` to `1.19.8`
+  - `antchfx/xmlquery`
+    - `v1.3.13` to `v1.3.15`
+  - `antchfx/xpath`
+    - `v1.2.1` to `v1.2.4`
+  - `pelletier/go-toml`
+    - `v2.0.6` to `v2.0.7`
+  - `fatih/color`
+    - `v1.13.0` to `v1.15.0`
+  - `go-logfmt/logfmt`
+    - `v0.5.1` to `v0.6.0`
+  - `mattn/go-isatty`
+    - `v0.0.16` to `v0.0.18`
+  - `golang.org/x/sys`
+    - `v0.3.0` to `v0.7.0`
+  - `golang.org/x/net`
+    - `v0.4.0` to `v0.9.0`
+  - `golang.org/x/text`
+    - `v0.5.0` to `v0.9.0`
+- CI
+  - (GH-177) Drop `Push Validation` workflow
+  - (GH-178) Rework workflow scheduling
+  - (GH-180) Remove `Push Validation` workflow status badge
+
+### Fixed
+
+- (GH-186) Update vuln analysis GHAW to use on.push hook
+
 ## [v0.1.16] - 2022-12-09
 
 ### Overview
@@ -484,7 +532,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.16...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.17...HEAD
+[v0.1.17]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.17
 [v0.1.16]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.16
 [v0.1.15]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.15
 [v0.1.14]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.14
