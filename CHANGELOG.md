@@ -26,6 +26,39 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.0] - 2023-04-12
+
+### Overview
+
+- Add support for generating DEB, RPM packages
+- Build improvements
+- Generated binary changes
+  - filename patterns
+  - compression (~ 66% smaller)
+  - executable metadata
+- built using Go 1.19.8
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Added
+
+- (GH-198) Generate RPM/DEB packages using nFPM
+- (GH-196) Add version details to Windows executables
+
+### Changed
+
+- (GH-197) Switch to semantic versioning (semver) compatible versioning
+  pattern
+- (GH-195) Makefile: Compress binaries & use fixed filenames
+- (GH-193) Makefile: Refresh recipes to add "standard" set, new
+  package-related options
+- (GH-194) Build dev/stable releases using go-ci Docker image
+
+### Fixed
+
+- (GH-199) Remove prototype n2n binary (redux)
+
 ## [v0.1.17] - 2023-04-12
 
 ### Overview
@@ -532,7 +565,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.1.17...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.0...HEAD
+[v0.2.0]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.0
 [v0.1.17]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.17
 [v0.1.16]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.16
 [v0.1.15]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.15
