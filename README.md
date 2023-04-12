@@ -131,14 +131,25 @@ been tested.
      `/tmp/go-lockss/release_assets/`
    - if using `go build`: look in `/tmp/go-lockss/`
 
+**NOTE**: Depending on which `Makefile` recipe you use the generated binary
+may be compressed and have an `xz` extension. If so, you should decompress the
+binary first before deploying it (e.g., `xz -d hayoh-linux-amd64.xz`).
+
 ### Using release binaries
 
 1. Download the [latest
    release](https://github.com/atc0005/go-lockss/releases/latest) binaries
+1. Decompress binaries
+   - e.g., `xz -d hayoh-linux-amd64.xz`
 1. Deploy
    - Place `hayoh` in a location of your choice
      - e.g., `/usr/local/bin/` (ongoing use) or `$HOME/` (one-off
        use)
+
+**NOTE**:
+
+DEB and RPM packages are provided as an alternative to manually deploying
+binaries.
 
 ## Configuration
 
