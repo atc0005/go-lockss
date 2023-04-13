@@ -26,6 +26,20 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.1] - 2023-04-13
+
+### Overview
+
+- Bug fixes
+- built using Go 1.19.8
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Fixed
+
+- (GH-203) Wrong version number info outputted by latest release
+
 ## [v0.2.0] - 2023-04-12
 
 ### Overview
@@ -565,7 +579,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.1...HEAD
+[v0.2.1]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.0
 [v0.1.17]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.17
 [v0.1.16]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.16
