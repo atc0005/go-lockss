@@ -19,17 +19,17 @@ import (
 	"github.com/atc0005/go-lockss/internal/caller"
 )
 
-// Version reflects the application version. This is overridden via Makefile
+// version reflects the application version. This is overridden via Makefile
 // for release builds.
-var Version = "dev build"
+var version = "dev build"
 
-// MyAppName is the branded name of this application/project. This value will
+// myAppName is the branded name of this application/project. This value will
 // be used in user-facing output.
-const MyAppName string = "go-lockss"
+const myAppName string = "go-lockss"
 
-// MyAppURL is the branded homepage or project repo location. This value will
+// myAppURL is the branded homepage or project repo location. This value will
 // be used in user-facing output.
-const MyAppURL string = "https://github.com/atc0005/" + MyAppName
+const myAppURL string = "https://github.com/atc0005/" + myAppName
 
 const (
 	versionFlagHelp            = "Whether to display application version and then immediately exit application."
@@ -154,15 +154,14 @@ func (c Config) String() string {
 	)
 }
 
-// Branding is responsible for emitting application name, version and origin
-func Branding() {
-	fmt.Fprintf(
-		flag.CommandLine.Output(),
-		"\n%s %s\n%s\n\n",
-		MyAppName,
-		Version,
-		MyAppURL,
-	)
+// Version emits application version string.
+func Version() string {
+	return version
+}
+
+// Branding is responsible for emitting application name, version and origin.
+func Branding() string {
+	return fmt.Sprintf("%s %s (%s)", myAppName, version, myAppURL)
 }
 
 // MyBinaryName returns the name of this binary
