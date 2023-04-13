@@ -35,7 +35,10 @@ func main() {
 	switch {
 	// TODO: How else to guard against nil cfg object?
 	case appCfg != nil && appCfg.ShowVersion():
-		config.Branding()
+		fmt.Fprintln(
+			flag.CommandLine.Output(),
+			config.Branding(),
+		)
 		os.Exit(0)
 	case err == nil:
 		// do nothing for this one
@@ -62,7 +65,7 @@ func main() {
 		"\n[%v] Starting %s version %q ...\n",
 		time.Now().Format("2006-01-02 15.04:05"),
 		config.MyBinaryName(),
-		config.Version,
+		config.Version(),
 	)
 
 	// If user supplied values, we should use those to retrieve the LOCKSS
