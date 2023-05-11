@@ -26,6 +26,26 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.2] - 2023-05-11
+
+### Overview
+
+- Dependency updates
+- built using Go 1.19.9
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.19.8` to `1.19.9`
+  - `atc0005/go-ci`
+    - `go-ci-oldstable-build-v0.10.4` to `go-ci-oldstable-build-v0.10.5`
+  - `golang.org/x/net`
+    - `v0.9.0` to `v0.10.0`
+
 ## [v0.2.1] - 2023-04-13
 
 ### Overview
@@ -579,7 +599,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.2...HEAD
+[v0.2.2]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.2
 [v0.2.1]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.0
 [v0.1.17]: https://github.com/atc0005/go-lockss/releases/tag/v0.1.17
