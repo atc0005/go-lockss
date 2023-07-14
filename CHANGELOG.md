@@ -26,6 +26,41 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.3] - 2023-07-14
+
+### Overview
+
+- Bug fixes
+- Dependency updates
+- built using Go 1.19.11
+  - Statically linked
+  - Windows (x86, x64)
+  - Linux (x86, x64)
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.19.9` to `1.19.11`
+  - `atc0005/go-ci`
+    - `go-ci-oldstable-build-v0.10.5` to `go-ci-oldstable-build-v0.11.4`
+  - `antchfx/xmlquery`
+    - `v1.3.15` to `v1.3.17`
+  - `mattn/go-isatty`
+    - `v0.0.18` to `v0.0.19`
+  - `golang.org/x/sys`
+    - `v0.8.0` to `v0.10.0`
+  - `golang.org/x/net`
+    - `v0.10.0` to `v0.12.0`
+  - `golang.org/x/text`
+    - `v0.9.0` to `v0.11.0`
+- (GH-216) Update vuln analysis GHAW to remove on.push hook
+
+### Fixed
+
+- (GH-212) Disable depguard linter
+- (GH-220) Restore local CodeQL workflow
+
 ## [v0.2.2] - 2023-05-11
 
 ### Overview
@@ -599,7 +634,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.3...HEAD
+[v0.2.3]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.3
 [v0.2.2]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.2
 [v0.2.1]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.0
