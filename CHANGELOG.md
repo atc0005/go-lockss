@@ -26,6 +26,46 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.5] - 2023-10-06
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-278) canary: bump golang from 1.20.7 to 1.20.8 in /dependabot/docker/go
+- (GH-265) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.13.4 to go-ci-oldstable-build-v0.13.5 in /dependabot/docker/builds
+- (GH-266) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.13.5 to go-ci-oldstable-build-v0.13.6 in /dependabot/docker/builds
+- (GH-269) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.13.6 to go-ci-oldstable-build-v0.13.7 in /dependabot/docker/builds
+- (GH-279) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.13.7 to go-ci-oldstable-build-v0.13.8 in /dependabot/docker/builds
+- (GH-286) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.13.8 to go-ci-oldstable-build-v0.13.9 in /dependabot/docker/builds
+- (GH-274) ghaw: bump actions/checkout from 3 to 4
+- (GH-276) go.mod: bump golang.org/x/net from 0.14.0 to 0.15.0
+- (GH-271) go.mod: bump golang.org/x/sys from 0.11.0 to 0.12.0
+- (GH-270) go.mod: bump golang.org/x/text from 0.12.0 to 0.13.0
+
+## [v0.2.4] - 2023-08-18
+
+### Added
+
+- (GH-231) Add initial automated release notes config
+- (GH-233) Add initial automated release build workflow
+
+### Changed
+
+- Dependencies
+  - `Go`
+    - `1.19.11` to `1.20.7`
+  - `atc0005/go-ci`
+    - `go-ci-oldstable-build-v0.11.4` to `go-ci-oldstable-build-v0.13.4`
+  - `golang.org/x/net`
+    - `v0.12.0` to `v0.14.0`
+  - `golang.org/x/sys`
+    - `v0.10.0` to `v0.11.0`
+  - `golang.org/x/text`
+    - `v0.11.0` to `v0.12.0`
+- (GH-235) Update Dependabot config to monitor both branches
+- (GH-259) Update project to Go 1.20 series
+
 ## [v0.2.3] - 2023-07-14
 
 ### Overview
@@ -634,7 +674,9 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.3...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.5...HEAD
+[v0.2.5]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.5
+[v0.2.4]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.4
 [v0.2.3]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.3
 [v0.2.2]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.2
 [v0.2.1]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.1
