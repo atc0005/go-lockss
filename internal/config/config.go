@@ -42,6 +42,10 @@ const (
 	nodePortFlagHelp           = "Additional TCP port to connect to on remote LOCKSS nodes to verify connectivity. This flag may be repeated for each additional TCP port to check. If not set, this application connects only to the port (usually 9729) specified in the LOCKSS configuration/property XML file."
 )
 
+// shorthandFlagSuffix is appended to short flag help text to emphasize that
+// the flag is a shorthand version of a longer flag.
+const shorthandFlagSuffix = " (shorthand)"
+
 // Default flag settings if not overridden by user input. Some constants are
 // untyped in order to allow type promotion as needed.
 const (
