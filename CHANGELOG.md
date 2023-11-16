@@ -26,6 +26,29 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.6] - 2023-11-16
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-324) canary: bump golang from 1.20.8 to 1.20.11 in /dependabot/docker/go
+- (GH-327) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.13.12 to go-ci-oldstable-build-v0.14.1 in /dependabot/docker/builds
+- (GH-307) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.13.9 to go-ci-oldstable-build-v0.13.12 in /dependabot/docker/builds
+- (GH-291) go.mod: bump github.com/antchfx/xmlquery from 1.3.17 to 1.3.18
+- (GH-313) go.mod: bump github.com/antchfx/xpath from 1.2.4 to 1.2.5
+- (GH-321) go.mod: bump github.com/fatih/color from 1.15.0 to 1.16.0
+- (GH-309) go.mod: bump github.com/mattn/go-isatty from 0.0.19 to 0.0.20
+- (GH-303) go.mod: bump golang.org/x/net from 0.15.0 to 0.17.0
+- (GH-325) go.mod: bump golang.org/x/net from 0.17.0 to 0.18.0
+- (GH-296) go.mod: bump golang.org/x/sys from 0.12.0 to 0.13.0
+- (GH-318) go.mod: bump golang.org/x/sys from 0.13.0 to 0.14.0
+- (GH-317) go.mod: bump golang.org/x/text from 0.13.0 to 0.14.0
+
+### Fixed
+
+- (GH-315) Fix goconst linting errors
+
 ## [v0.2.5] - 2023-10-06
 
 ### Changed
@@ -674,7 +697,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.5...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.6...HEAD
+[v0.2.6]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.6
 [v0.2.5]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.5
 [v0.2.4]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.4
 [v0.2.3]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.3
