@@ -26,6 +26,17 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.7] - 2023-12-09
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-337) canary: bump golang from 1.20.11 to 1.20.12 in /dependabot/docker/go
+- (GH-338) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.14.1 to go-ci-oldstable-build-v0.14.2 in /dependabot/docker/builds
+- (GH-332) go.mod: bump golang.org/x/net from 0.18.0 to 0.19.0
+- (GH-333) go.mod: bump golang.org/x/sys from 0.14.0 to 0.15.0
+
 ## [v0.2.6] - 2023-11-16
 
 ### Changed
@@ -697,7 +708,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.6...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.7...HEAD
+[v0.2.7]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.7
 [v0.2.6]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.6
 [v0.2.5]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.5
 [v0.2.4]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.4
