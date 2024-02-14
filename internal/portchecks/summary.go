@@ -35,7 +35,7 @@ func (rs Results) PrintSummary() {
 	// Separator row; I'm sure this can be handled better
 	fmt.Fprintln(w, "----\t----\t----\t-----\t")
 
-	sort.Slice(rs, func(i, j int) bool {
+	sort.Slice(rs, func(i, _ int) bool {
 		// return rs[i].Open < rs[j].Open
 		return rs[i].Open
 
