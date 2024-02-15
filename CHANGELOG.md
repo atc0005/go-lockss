@@ -26,6 +26,25 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.9] - 2024-02-15
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-370) canary: bump golang from 1.20.13 to 1.20.14 in /dependabot/docker/go
+- (GH-355) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.14.3 to go-ci-oldstable-build-v0.14.4 in /dependabot/docker/builds
+- (GH-359) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.14.4 to go-ci-oldstable-build-v0.14.5 in /dependabot/docker/builds
+- (GH-361) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.14.5 to go-ci-oldstable-build-v0.14.6 in /dependabot/docker/builds
+- (GH-373) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.14.6 to go-ci-oldstable-build-v0.14.9 in /dependabot/docker/builds
+- (GH-376) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.14.9 to go-ci-oldstable-build-v0.15.0 in /dependabot/docker/builds
+- (GH-368) go.mod: bump golang.org/x/net from 0.20.0 to 0.21.0
+- (GH-369) go.mod: bump golang.org/x/sys from 0.16.0 to 0.17.0
+
+### Fixed
+
+- (GH-379) Fix `unused-parameter` revive linting error
+
 ## [v0.2.8] - 2024-01-19
 
 ### Changed
@@ -719,7 +738,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.8...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.9...HEAD
+[v0.2.9]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.9
 [v0.2.8]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.8
 [v0.2.7]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.7
 [v0.2.6]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.6
