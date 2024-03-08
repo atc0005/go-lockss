@@ -26,6 +26,24 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.10] - 2024-03-08
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-399) Add todo/release label to "Go Runtime" PRs
+- (GH-390) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.15.2 to go-ci-oldstable-build-v0.15.3 in /dependabot/docker/builds
+- (GH-398) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.15.3 to go-ci-oldstable-build-v0.15.4 in /dependabot/docker/builds
+- (GH-386) canary: bump golang from 1.21.6 to 1.21.7 in /dependabot/docker/go
+- (GH-383) docker: bump atc0005/go-ci from go-ci-oldstable-build-v0.15.0 to go-ci-oldstable-build-v0.15.2 in /dependabot/docker/builds
+- (GH-394) Go Dependency: Bump golang.org/x/net from 0.21.0 to 0.22.0
+- (GH-393) Go Dependency: Bump golang.org/x/sys from 0.17.0 to 0.18.0
+- (GH-395) Go Runtime: Bump golang from 1.21.7 to 1.21.8 in /dependabot/docker/go
+- (GH-388) Update Dependabot PR prefixes (redux)
+- (GH-387) Update Dependabot PR prefixes
+- (GH-385) Update project to Go 1.21 series
+
 ## [v0.2.9] - 2024-02-15
 
 ### Changed
@@ -738,7 +756,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.9...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.10...HEAD
+[v0.2.10]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.10
 [v0.2.9]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.9
 [v0.2.8]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.8
 [v0.2.7]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.7
