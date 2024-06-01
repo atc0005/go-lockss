@@ -35,7 +35,7 @@ func main() {
 	switch {
 	// TODO: How else to guard against nil cfg object?
 	case appCfg != nil && appCfg.ShowVersion():
-		fmt.Fprintln(
+		_, _ = fmt.Fprintln(
 			flag.CommandLine.Output(),
 			config.Branding(),
 		)
