@@ -27,13 +27,13 @@ func (rs Results) PrintSummary() {
 
 	// Add some lead-in spacing to better separate any earlier log messages from
 	// summary output
-	fmt.Fprintf(w, "\n")
+	_, _ = fmt.Fprintf(w, "\n")
 
 	// Header row in output
-	fmt.Fprintf(w, "Peer\tPort\tOpen\tError\t\n")
+	_, _ = fmt.Fprintf(w, "Peer\tPort\tOpen\tError\t\n")
 
 	// Separator row; I'm sure this can be handled better
-	fmt.Fprintln(w, "----\t----\t----\t-----\t")
+	_, _ = fmt.Fprintln(w, "----\t----\t----\t-----\t")
 
 	sort.Slice(rs, func(i, _ int) bool {
 		// return rs[i].Open < rs[j].Open
@@ -49,7 +49,7 @@ func (rs Results) PrintSummary() {
 		if item.Error != nil {
 			errText = item.Error.Error()
 		}
-		fmt.Fprintf(w,
+		_, _ = fmt.Fprintf(w,
 			"%s\t%d\t%t\t%s\t\n",
 			item.Host,
 			item.Port,
@@ -58,7 +58,7 @@ func (rs Results) PrintSummary() {
 		)
 	}
 
-	fmt.Fprintln(w)
+	_, _ = fmt.Fprintln(w)
 
 	hosts := rs.Hosts()
 	hostsReachable := rs.HostsReachable()
