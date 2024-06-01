@@ -180,7 +180,7 @@ func flagsUsage() func() {
 
 		Branding()
 
-		fmt.Fprintf(
+		_, _ = fmt.Fprintf(
 			flag.CommandLine.Output(),
 			"Usage of \"%s\":\n",
 			MyBinaryName(),
