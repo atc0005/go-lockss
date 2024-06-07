@@ -26,6 +26,26 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.13] - 2024-06-07
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-448) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.20.4 to go-ci-oldstable-build-v0.20.5 in /dependabot/docker/builds
+- (GH-450) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.20.5 to go-ci-oldstable-build-v0.20.6 in /dependabot/docker/builds
+- (GH-463) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.20.6 to go-ci-oldstable-build-v0.20.7 in /dependabot/docker/builds
+- (GH-445) Go Dependency: Bump github.com/fatih/color from 1.16.0 to 1.17.0
+- (GH-461) Go Dependency: Bump golang.org/x/net from 0.25.0 to 0.26.0
+- (GH-459) Go Dependency: Bump golang.org/x/sys from 0.20.0 to 0.21.0
+- (GH-460) Go Dependency: Bump golang.org/x/text from 0.15.0 to 0.16.0
+- (GH-454) Go Runtime: Bump golang from 1.21.10 to 1.21.11 in /dependabot/docker/go
+
+### Fixed
+
+- (GH-451) Remove inactive maligned linter
+- (GH-452) Fix errcheck linting errors
+
 ## [v0.2.12] - 2024-05-13
 
 ### Changed
@@ -787,7 +807,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.12...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.13...HEAD
+[v0.2.13]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.13
 [v0.2.12]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.12
 [v0.2.11]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.11
 [v0.2.10]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.10
