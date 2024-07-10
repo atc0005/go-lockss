@@ -26,6 +26,21 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.14] - 2024-07-10
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-467) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.20.7 to go-ci-oldstable-build-v0.20.8 in /dependabot/docker/builds
+- (GH-475) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.20.8 to go-ci-oldstable-build-v0.21.2 in /dependabot/docker/builds
+- (GH-479) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.21.2 to go-ci-oldstable-build-v0.21.3 in /dependabot/docker/builds
+- (GH-481) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.21.3 to go-ci-oldstable-build-v0.21.4 in /dependabot/docker/builds
+- (GH-472) Go Dependency: Bump github.com/antchfx/xmlquery from 1.4.0 to 1.4.1
+- (GH-487) Go Dependency: Bump golang.org/x/net from 0.26.0 to 0.27.0
+- (GH-484) Go Dependency: Bump golang.org/x/sys from 0.21.0 to 0.22.0
+- (GH-478) Go Runtime: Bump golang from 1.21.11 to 1.21.12 in /dependabot/docker/go
+
 ## [v0.2.13] - 2024-06-07
 
 ### Changed
@@ -807,7 +822,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.13...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.14...HEAD
+[v0.2.14]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.14
 [v0.2.13]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.13
 [v0.2.12]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.12
 [v0.2.11]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.11
