@@ -10,6 +10,7 @@
 package config
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/apex/log"
@@ -67,7 +68,7 @@ func (c Config) Validate() error {
 				)
 				log.Debugf("%s: %v", myFuncName, errMsg)
 
-				return fmt.Errorf(errMsg)
+				return errors.New(errMsg)
 			}
 		}
 
