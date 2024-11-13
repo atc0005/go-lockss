@@ -26,6 +26,27 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.16] - 2024-11-13
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-537) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.21.12 to go-ci-oldstable-build-v0.21.13 in /dependabot/docker/builds
+- (GH-564) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.21.13 to go-ci-oldstable-build-v0.21.15 in /dependabot/docker/builds
+- (GH-536) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.21.9 to go-ci-oldstable-build-v0.21.12 in /dependabot/docker/builds
+- (GH-546) Go Dependency: Bump github.com/antchfx/xmlquery from 1.4.1 to 1.4.2
+- (GH-549) Go Dependency: Bump github.com/antchfx/xpath from 1.3.1 to 1.3.2
+- (GH-554) Go Dependency: Bump github.com/fatih/color from 1.17.0 to 1.18.0
+- (GH-534) Go Dependency: Bump golang.org/x/net from 0.28.0 to 0.29.0
+- (GH-561) Go Dependency: Bump golang.org/x/net from 0.29.0 to 0.31.0
+- (GH-528) Go Dependency: Bump golang.org/x/sys from 0.24.0 to 0.25.0
+- (GH-559) Go Dependency: Bump golang.org/x/sys from 0.25.0 to 0.27.0
+- (GH-529) Go Dependency: Bump golang.org/x/text from 0.17.0 to 0.18.0
+- (GH-558) Go Dependency: Bump golang.org/x/text from 0.18.0 to 0.20.0
+- (GH-532) Go Runtime: Bump golang from 1.22.6 to 1.22.7 in /dependabot/docker/go
+- (GH-555) Go Runtime: Bump golang from 1.22.7 to 1.22.9 in /dependabot/docker/go
+
 ## [v0.2.15] - 2024-08-21
 
 ### Changed
@@ -848,7 +869,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.15...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.16...HEAD
+[v0.2.16]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.16
 [v0.2.15]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.15
 [v0.2.14]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.14
 [v0.2.13]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.13
