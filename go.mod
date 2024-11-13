@@ -10,7 +10,7 @@ module github.com/atc0005/go-lockss
 go 1.20
 
 require (
-	github.com/antchfx/xmlquery v1.4.1
+	github.com/antchfx/xmlquery v1.4.2
 	github.com/apex/log v1.9.0
 )
 
