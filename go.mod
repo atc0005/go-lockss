@@ -26,5 +26,5 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	golang.org/x/net v0.31.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/text v0.20.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
 )
