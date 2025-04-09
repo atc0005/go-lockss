@@ -26,6 +26,36 @@ The following types of changes will be recorded in this file:
 
 - placeholder
 
+## [v0.2.17] - 2025-04-09
+
+### Changed
+
+#### Dependency Updates
+
+- (GH-570) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.21.15 to go-ci-oldstable-build-v0.21.16 in /dependabot/docker/builds
+- (GH-572) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.21.16 to go-ci-oldstable-build-v0.21.17 in /dependabot/docker/builds
+- (GH-651) Build Image: Bump atc0005/go-ci from go-ci-oldstable-build-v0.21.17 to go-ci-oldstable-build-v0.22.9 in /dependabot/docker/builds
+- (GH-657) Disable Dependabot automatic PR rebasing
+- (GH-607) Go Dependency: Bump github.com/antchfx/xmlquery from 1.4.2 to 1.4.4
+- (GH-584) Go Dependency: Bump github.com/antchfx/xpath from 1.3.2 to 1.3.3
+- (GH-661) Go Dependency: Bump github.com/antchfx/xpath from 1.3.3 to 1.3.4
+- (GH-595) Go Dependency: Bump github.com/mattn/go-colorable from 0.1.13 to 0.1.14
+- (GH-645) Go Dependency: Bump golang.org/x/net from 0.31.0 to 0.38.0
+- (GH-665) Go Dependency: Bump golang.org/x/net from 0.38.0 to 0.39.0
+- (GH-633) Go Dependency: Bump golang.org/x/sys from 0.27.0 to 0.31.0
+- (GH-659) Go Dependency: Bump golang.org/x/sys from 0.31.0 to 0.32.0
+- (GH-632) Go Dependency: Bump golang.org/x/text from 0.20.0 to 0.23.0
+- (GH-660) Go Dependency: Bump golang.org/x/text from 0.23.0 to 0.24.0
+- (GH-648) Go Runtime: Bump golang from 1.22.10 to 1.23.8 in /dependabot/docker/go
+- (GH-573) Go Runtime: Bump golang from 1.22.9 to 1.22.10 in /dependabot/docker/go
+- (GH-640) go.mod: update minimum Go version to 1.23.0
+- (GH-653) Update `github.com/golang/groupcache` dependency
+- (GH-623) Update project to Go 1.23 series
+
+### Fixed
+
+- (GH-655) Fix invalid Dependabot go.mod changes
+
 ## [v0.2.16] - 2024-11-13
 
 ### Changed
@@ -869,7 +899,8 @@ Worth noting (in no particular order):
 - README
   - Link badges to applicable GitHub Actions workflows results
 
-[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.16...HEAD
+[Unreleased]: https://github.com/atc0005/go-lockss/compare/v0.2.17...HEAD
+[v0.2.17]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.17
 [v0.2.16]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.16
 [v0.2.15]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.15
 [v0.2.14]: https://github.com/atc0005/go-lockss/releases/tag/v0.2.14
