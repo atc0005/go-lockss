@@ -147,6 +147,7 @@ type ancestorQuery struct {
 	name     string
 	iterator func() NodeNavigator
 	table    map[uint64]bool
+	pos      int
 
 	Self      bool
 	Input     query
@@ -164,6 +165,8 @@ func (a *ancestorQuery) Select(t iterator) NodeNavigator {
 			if node == nil {
 				return nil
 			}
+			// Reset position for a new input context node
+			a.pos = 0
 			first := true
 			node = node.Copy()
 			a.iterator = func() NodeNavigator {
@@ -186,6 +189,8 @@ func (a *ancestorQuery) Select(t iterator) NodeNavigator {
 			node_id := getHashCode(node.Copy())
 			if _, ok := a.table[node_id]; !ok {
 				a.table[node_id] = true
+				// Increase position for each matched node in current input context
+				a.pos++
 				return node
 			}
 		}
@@ -196,6 +201,8 @@ func (a *ancestorQuery) Select(t iterator) NodeNavigator {
 func (a *ancestorQuery) Evaluate(t iterator) interface{} {
 	a.Input.Evaluate(t)
 	a.iterator = nil
+	// Reset the table when re-evaluating to ensure clean state
+	a.table = nil
 	return a
 }
 
@@ -213,6 +220,13 @@ func (a *ancestorQuery) ValueType() resultType {
 
 func (a *ancestorQuery) Properties() queryProp {
 	return queryProps.Position | queryProps.Count | queryProps.Cached | queryProps.Merge | queryProps.Reverse
+}
+
+// position returns the ordinal of the current matched node within the axis
+// traversal for the current input context node. This is required so numeric
+// predicates like [1] or [2] on the ancestor axis resolve in axis order.
+func (a *ancestorQuery) position() int {
+	return a.pos
 }
 
 // attributeQuery is an XPath attribute node query.(@*)
@@ -817,6 +831,8 @@ func (f *filterQuery) Select(t iterator) NodeNavigator {
 
 func (f *filterQuery) Evaluate(t iterator) interface{} {
 	f.Input.Evaluate(t)
+	// Reset the position map when re-evaluating to ensure clean state
+	f.positmap = nil
 	return f
 }
 
@@ -969,15 +985,6 @@ type logicalQuery struct {
 }
 
 func (l *logicalQuery) Select(t iterator) NodeNavigator {
-	// When a XPath expr is logical expression.
-	node := t.Current().Copy()
-	val := l.Evaluate(t)
-	switch val.(type) {
-	case bool:
-		if val.(bool) == true {
-			return node
-		}
-	}
 	return nil
 }
 
@@ -1011,8 +1018,17 @@ func (n *numericQuery) Select(t iterator) NodeNavigator {
 }
 
 func (n *numericQuery) Evaluate(t iterator) interface{} {
-	m := n.Left.Evaluate(t)
-	k := n.Right.Evaluate(t)
+	// Snapshot the operator's context so each operand evaluates and coerces
+	// against equivalent context. filterQuery (predicates) mutates t.Current()
+	// while selecting the left operand; without restore, a context-sensitive
+	// right operand (e.g. count(self::*)) observes the moved navigator.
+	// Eager asNumber materializes node-set coercion before restore so Do's
+	// lazy conversion cannot re-Select against the wrong context either.
+	root := t.Current().Copy()
+	m := asNumber(t, n.Left.Evaluate(t))
+	t.Current().MoveTo(root)
+	k := asNumber(t, n.Right.Evaluate(t))
+	t.Current().MoveTo(root)
 	return n.Do(t, m, k)
 }
 
@@ -1346,6 +1362,7 @@ func (m *mergeQuery) Select(t iterator) NodeNavigator {
 
 func (m *mergeQuery) Evaluate(t iterator) interface{} {
 	m.Input.Evaluate(t)
+	m.iterator = nil
 	return m
 }
 
